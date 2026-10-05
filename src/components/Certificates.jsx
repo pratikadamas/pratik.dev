@@ -66,9 +66,11 @@ function CertCard({ cert, onClick }) {
           </div>
         </div>
 
-        {/* Category badge */}
-        <div className="absolute top-2 right-2">
-          <span className="tag text-[10px]">{cert.category}</span>
+        {/* Category badge with glassmorphism backdrop */}
+        <div className="absolute top-2.5 right-2.5">
+          <span className="px-2.5 py-0.5 text-[10px] font-medium rounded-full backdrop-blur-md bg-black/70 text-primary-300 border border-white/10 shadow-sm">
+            {cert.category}
+          </span>
         </div>
       </div>
 
@@ -76,7 +78,7 @@ function CertCard({ cert, onClick }) {
         <h3 className="text-sm font-bold line-clamp-2" style={{ color: 'var(--text-primary)' }}>{cert.title}</h3>
         <div className="flex items-center gap-1.5">
           <Building2 className="w-3 h-3 flex-shrink-0" style={{ color: 'var(--text-tertiary)' }} aria-hidden="true" />
-          <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>{cert.organization}</p>
+          <p className="text-xs truncate" style={{ color: 'var(--text-secondary)' }}>{cert.organization}</p>
         </div>
         <div className="flex items-center gap-1.5">
           <Calendar className="w-3 h-3 flex-shrink-0" style={{ color: 'var(--text-tertiary)' }} aria-hidden="true" />

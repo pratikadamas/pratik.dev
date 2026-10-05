@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "title": "AWS Cloud Operations Training",
+    "organization": "AWS Academy Graduate",
+    "date": "2026",
+    "image": "/certificates/AWS Cloud Operations traning Badeg.png",
+    "credentialUrl": "#",
+    "category": "Cloud"
+  },
+  {
+    "id": 2,
+    "title": "AWS Data Engineering Training",
+    "organization": "AWS Academy Graduate",
+    "date": "2026",
+    "image": "/certificates/AWS Data Engineering Training Badge.png",
+    "credentialUrl": "#",
+    "category": "Data & Cloud"
+  },
+  {
+    "id": 3,
+    "title": "AWS Machine Learning Foundations",
+    "organization": "AWS Academy Graduate",
+    "date": "2026",
+    "image": "/certificates/AWS Machine Learning Foundation Training Badge.png",
+    "credentialUrl": "#",
+    "category": "AI/ML"
+  },
+  {
+    "id": 4,
+    "title": "Problem Solving Through Programming in C",
+    "organization": "NPTEL Elite (IIT Kharagpur)",
+    "date": "2024",
+    "image": "/certificates/C Language NPTEL.jpg",
+    "credentialUrl": "#",
+    "category": "Programming"
+  },
+  {
+    "id": 5,
+    "title": "Programming in Modern C++",
+    "organization": "NPTEL Elite (IIT Kharagpur)",
+    "date": "2024",
+    "image": "/certificates/C++ NPTEL.jpg",
+    "credentialUrl": "#",
+    "category": "Programming"
+  },
+  {
+    "id": 6,
+    "title": "Bharatiya Antariksh Hackathon 2024",
+    "organization": "ISRO",
+    "date": "2024",
+    "image": "/certificates/ISRO Hackathon.png",
+    "credentialUrl": "#",
+    "category": "Hackathon"
+  },
+  {
+    "id": 7,
+    "title": "Introduction to Data Science",
+    "organization": "Infosys Springboard",
+    "date": "2026",
+    "image": "/certificates/Introduction to Data Science.png",
+    "credentialUrl": "#",
+    "category": "Data Science"
+  },
+  {
+    "id": 8,
+    "title": "Introduction to Natural Language Processing",
+    "organization": "Infosys Springboard",
+    "date": "2026",
+    "image": "/certificates/Introduction to Natural Language Processing.png",
+    "credentialUrl": "#",
+    "category": "AI/ML"
+  },
+  {
+    "id": 9,
+    "title": "Data Structures & Algorithms Using Java",
+    "organization": "NPTEL Elite (IIT Kharagpur)",
+    "date": "2024",
+    "image": "/certificates/JAVA NPTEL.jpg",
+    "credentialUrl": "#",
+    "category": "Programming"
+  },
+  {
+    "id": 10,
+    "title": "Machine Learning Algorithms",
+    "organization": "Great Learning",
+    "date": "2024",
+    "image": "/certificates/Machine Learning Algorithm.jpg",
+    "credentialUrl": "#",
+    "category": "AI/ML"
+  },
+  {
+    "id": 11,
+    "title": "JavaScript, jQuery & TypeScript: Full-Stack",
+    "organization": "Udemy",
+    "date": "2024",
+    "image": "/certificates/Udemy-jQuery.jpg",
+    "credentialUrl": "#",
+    "category": "Web Dev"
+  },
+  {
+    "id": 12,
+    "title": "QuizOff 2026 - India's Biggest AI Quiz",
+    "organization": "Unstop & CampusCrew",
+    "date": "2026",
+    "image": "/certificates/Unstop.jpeg",
+    "credentialUrl": "#",
+    "category": "Competitions"
+  },
+  {
+    "id": 13,
+    "title": "Coding & Problem Solving",
+    "organization": "Adamas University",
+    "date": "2024",
+    "image": "/certificates/code.jpg",
+    "credentialUrl": "#",
+    "category": "Programming"
+  },
+  {
+    "id": 14,
+    "title": "AI For Youth & Digital Skills",
+    "organization": "Intel & Skill India",
+    "date": "2023",
+    "image": "/certificates/skillindia.jpg",
+    "credentialUrl": "#",
+    "category": "Government"
+  }
+]
