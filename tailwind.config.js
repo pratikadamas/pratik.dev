@@ -8,39 +8,44 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-        mono: ['JetBrains Mono', 'SF Mono', 'Fira Code', 'monospace'],
+        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'Fira Code', 'monospace'],
       },
       colors: {
-        // Dark palette tokens
+        // Modern Dark palette tokens
         dark: {
-          bg: '#0D0F0E',
-          card: '#171A18',
-          surface: '#131614',
-          border: '#282D2A',
-          'border-hover': '#3E4540',
-          text: '#F1F3EF',
-          muted: '#A5ADA7',
-          dim: '#707872',
+          bg: '#0B0F17',
+          card: '#111827',
+          surface: '#151D2E',
+          border: '#1E293B',
+          'border-hover': '#334155',
+          text: '#F8FAFC',
+          muted: '#94A3B8',
+          dim: '#64748B',
         },
-        // Light palette tokens
+        // Modern Light palette tokens
         light: {
-          bg: '#F4F3EE',
-          card: '#F8F7F2',
-          surface: '#EFECE4',
-          border: '#D8D8D0',
-          'border-hover': '#B5B5AC',
-          text: '#171A18',
-          muted: '#555D58',
-          dim: '#7D8580',
+          bg: '#F8FAFC',
+          card: '#FFFFFF',
+          surface: '#F1F5F9',
+          border: '#E2E8F0',
+          'border-hover': '#CBD5E1',
+          text: '#0F172A',
+          muted: '#475569',
+          dim: '#94A3B8',
         },
-        // Sage green accent (sparingly used ~5%)
-        sage: {
-          300: '#A3D1B3',
-          400: '#8FBF9F', // Dark mode accent
-          500: '#6FA382',
-          600: '#4F765C', // Light mode accent
-          700: '#3D5C47',
+        // Electric Emerald & Teal Accent
+        accent: {
+          300: '#6EE7B7',
+          400: '#34D399',
+          500: '#10B981',
+          600: '#059669',
+          700: '#047857',
+        },
+        cyan: {
+          400: '#22D3EE',
+          500: '#06B6D4',
+          600: '#0891B2',
         },
       },
     },

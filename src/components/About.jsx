@@ -16,9 +16,9 @@ const focusAreas = [
   },
   {
     index: '03',
-    title: 'Quantum Computing',
+    title: 'Vector Databases & Data Engineering',
     description:
-      'Researching quantum circuit transpilation, qubit routing, and gate synthesis using Qiskit. Exploring computational efficiency on noisy intermediate-scale quantum devices.',
+      'Implementing high-throughput data pipelines, semantic vector search with Pinecone and Qdrant, and in-memory analytical engines using DuckDB and Pandas for low-latency retrieval.',
   },
   {
     index: '04',
@@ -58,7 +58,7 @@ export default function About() {
               I am <strong className="font-semibold" style={{ color: 'var(--text-primary)' }}>Pratik Giri</strong>, an engineer with an analytical approach to software development. Rather than viewing machine learning and software engineering in silos, I focus on the entire lifecycle — from data ingestion and algorithm design to reliable backend infrastructure and intuitive user interfaces.
             </p>
             <p>
-              Whether deploying automated license plate recognition at the edge, building data intelligence tools, or investigating transpiler passes for quantum circuits, my goal is always to deliver clean code, measurable performance, and robust architecture.
+              Whether deploying automated license plate recognition at the edge, building data intelligence tools, or architecting semantic vector search engines, my goal is always to deliver clean code, measurable performance, and robust architecture.
             </p>
           </div>
 

@@ -11,6 +11,7 @@ export const techCategories = [
       { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg", tag: "OOP" },
       { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", tag: "Primary" },
       { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", tag: "Web" },
+      { name: "PHP", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg", tag: "Backend" },
     ],
   },
   {
@@ -29,6 +30,7 @@ export const techCategories = [
       { name: "OpenCV", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg", tag: "Vision" },
       { name: "YOLO", icon: null, tag: "Detection", emoji: "🎯" },
       { name: "EasyOCR", icon: null, tag: "OCR", emoji: "📝" },
+      { name: "Streamlit", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/streamlit/streamlit-original.svg", tag: "ML Apps", emoji: "👑" },
     ],
   },
   {
@@ -61,6 +63,8 @@ export const techCategories = [
       { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg", tag: "SQL" },
       { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg", tag: "NoSQL" },
       { name: "DuckDB", icon: null, tag: "Analytics", emoji: "🦆" },
+      { name: "Pinecone", icon: null, tag: "Vector DB", emoji: "🌲" },
+      { name: "Qdrant", icon: null, tag: "Vector DB", emoji: "⚡" },
     ],
   },
   {
@@ -77,21 +81,6 @@ export const techCategories = [
       { name: "Linux", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg", tag: "OS" },
       { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg", tag: "Cloud" },
       { name: "Azure", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg", tag: "Cloud" },
-    ],
-  },
-  {
-    id: "quantum",
-    label: "Quantum Computing",
-    icon: "Atom",
-    color: "from-cyan-500/10 to-sky-600/10",
-    borderColor: "border-cyan-500/20",
-    accentColor: "text-cyan-500",
-    technologies: [
-      { name: "Qiskit", icon: null, tag: "Framework", emoji: "⚛️" },
-      { name: "Quantum Circuits", icon: null, tag: "Theory", emoji: "🔬" },
-      { name: "Quantum Algorithms", icon: null, tag: "Theory", emoji: "📐" },
-      { name: "Quantum Transpilation", icon: null, tag: "Optimization", emoji: "🔀" },
-      { name: "Qubit Mapping", icon: null, tag: "Hardware", emoji: "💡" },
     ],
   },
 ];

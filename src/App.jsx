@@ -6,7 +6,6 @@ import About from './components/About';
 import TechStack from './components/TechStack';
 import Projects from './components/Projects';
 import Certificates from './components/Certificates';
-import Achievements from './components/Achievements';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
@@ -54,7 +53,6 @@ function App() {
           <TechStack />
           <Projects />
           <Certificates />
-          <Achievements />
           <Contact />
         </main>
 

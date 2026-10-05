@@ -1,149 +1,180 @@
 import { useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Github, ExternalLink, ArrowUpRight, Terminal } from 'lucide-react';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { Github, ExternalLink } from 'lucide-react';
 import { projects, projectCategories } from '../data/projects';
 
-// High-fidelity technical previews for projects
-function TechnicalPreview({ project }) {
-  if (project.image) {
-    return (
-      <div className="w-full h-full min-h-[260px] sm:min-h-[320px] overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--bg-tertiary)] flex items-center justify-center">
+// Color maps for tech tags
+const techColors = {
+  Python: 'bg-blue-500/10 text-blue-500',
+  React: 'bg-cyan-500/10 text-cyan-500',
+  Flask: 'bg-gray-500/10 text-gray-500',
+  YOLO: 'bg-red-500/10 text-red-500',
+  OpenCV: 'bg-green-500/10 text-green-500',
+  EasyOCR: 'bg-purple-500/10 text-purple-500',
+  FastAPI: 'bg-teal-500/10 text-teal-500',
+  DuckDB: 'bg-yellow-500/10 text-yellow-600',
+  Pandas: 'bg-indigo-500/10 text-indigo-500',
+  'Tailwind CSS': 'bg-sky-500/10 text-sky-500',
+  'Node.js': 'bg-green-500/10 text-green-600',
+  MongoDB: 'bg-emerald-500/10 text-emerald-500',
+  PHP: 'bg-violet-500/10 text-violet-400',
+  MySQL: 'bg-orange-500/10 text-orange-400',
+  Pinecone: 'bg-emerald-500/10 text-emerald-400',
+  Qdrant: 'bg-teal-500/10 text-teal-400',
+  Streamlit: 'bg-red-500/10 text-red-400',
+  default: 'bg-gray-500/10 text-gray-400',
+};
+
+function getTechColor(tech) {
+  return techColors[tech] || techColors.default;
+}
+
+// Placeholder thumbnail based on category
+function ProjectThumbnail({ project }) {
+  const categoryBg = {
+    'ai-ml': 'from-purple-500/20 to-violet-600/20',
+    'full-stack': 'from-emerald-500/20 to-teal-600/20',
+    'other': 'from-orange-500/20 to-amber-600/20',
+  };
+
+  const categoryIcon = {
+    'ai-ml': '🤖',
+    'full-stack': '🌐',
+    'other': '💻',
+  };
+
+  return (
+    <div className={`w-full h-48 bg-gradient-to-br ${categoryBg[project.category] || 'from-gray-500/20 to-gray-600/20'} flex items-center justify-center overflow-hidden relative`}>
+      {project.image ? (
         <img
           src={project.image}
-          alt={`${project.title} screenshot`}
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+          alt={`${project.title} thumbnail`}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           loading="lazy"
         />
-      </div>
-    );
-  }
-
-  // ANPR Preview Schematic
-  if (project.category === 'ai-ml') {
-    return (
-      <div className="w-full h-full min-h-[260px] sm:min-h-[320px] rounded-lg border border-[var(--border)] bg-[var(--bg-tertiary)] p-4 sm:p-6 flex flex-col justify-between font-mono text-xs overflow-hidden select-none">
-        {/* Terminal Header */}
-        <div className="flex items-center justify-between pb-3 border-b border-[var(--border)] text-[var(--text-tertiary)]">
-          <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-[var(--border-hover)]" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[var(--border-hover)]" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[var(--border-hover)]" />
-          </div>
-          <span className="text-[10px] tracking-wider uppercase">vision_engine.py — ESP32-CAM</span>
+      ) : (
+        <div className="flex flex-col items-center gap-3 transition-transform duration-500 group-hover:scale-110">
+          <span className="text-5xl" role="img" aria-label={project.category}>
+            {categoryIcon[project.category] || '💻'}
+          </span>
+          <span
+            className="text-xs font-mono font-medium px-3 py-1 rounded-full transition-colors"
+            style={{ background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.85)' }}
+          >
+            {project.category.replace('-', ' ').toUpperCase()}
+          </span>
         </div>
-
-        {/* Visual Detection Box Simulation */}
-        <div className="my-auto py-4">
-          <div className="border border-dashed border-[var(--accent-border)] bg-[var(--accent-subtle)] rounded p-3 mb-3">
-            <div className="flex items-center justify-between text-[11px] mb-1.5 font-medium" style={{ color: 'var(--accent)' }}>
-              <span>BOUNDING_BOX: [x:120, y:68, w:340, h:110]</span>
-              <span>YOLOv8 CONF: 0.942</span>
-            </div>
-            <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded px-3 py-2 flex items-center justify-between">
-              <span className="tracking-widest font-bold" style={{ color: 'var(--text-primary)' }}>WB-02-AK-4921</span>
-              <span className="text-[10px] text-[var(--text-tertiary)]">EasyOCR · 14ms</span>
-            </div>
-          </div>
-          <div className="flex justify-between text-[11px] text-[var(--text-tertiary)] px-1">
-            <span>FPS: 28.4</span>
-            <span>FRAME_LATENCY: 32ms</span>
-            <span>MQTT: CONNECTED</span>
-          </div>
-        </div>
-
-        {/* Status Line */}
-        <div className="pt-3 border-t border-[var(--border)] flex items-center justify-between text-[11px] text-[var(--text-tertiary)]">
-          <span>PARKING_SLOT: #04 [OCCUPIED]</span>
-          <span style={{ color: 'var(--accent)' }}>● REALTIME</span>
-        </div>
-      </div>
-    );
-  }
-
-  // Quantum Circuit Transpiler Schematic
-  if (project.category === 'quantum') {
-    return (
-      <div className="w-full h-full min-h-[260px] sm:min-h-[320px] rounded-lg border border-[var(--border)] bg-[var(--bg-tertiary)] p-4 sm:p-6 flex flex-col justify-between font-mono text-xs overflow-hidden select-none">
-        <div className="flex items-center justify-between pb-3 border-b border-[var(--border)] text-[var(--text-tertiary)]">
-          <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-[var(--border-hover)]" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[var(--border-hover)]" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[var(--border-hover)]" />
-          </div>
-          <span className="text-[10px] tracking-wider uppercase">qiskit_transpiler_pass.py</span>
-        </div>
-
-        <div className="my-auto py-3 space-y-2">
-          {/* Circuit Lines */}
-          <div className="space-y-1.5 text-[11px] text-[var(--text-secondary)]">
-            <div className="p-2 rounded bg-[var(--bg-card)] border border-[var(--border)] flex items-center justify-between">
-              <span>q[0]: ──[ H ]────■────[ Rz ]────</span>
-              <span className="text-[10px] text-[var(--text-tertiary)]">depth: 3</span>
-            </div>
-            <div className="p-2 rounded bg-[var(--bg-card)] border border-[var(--border)] flex items-center justify-between">
-              <span>q[1]: ─────────[ X ]──[ M ]──────</span>
-              <span className="text-[10px] text-[var(--text-tertiary)]">depth: 2</span>
-            </div>
-          </div>
-
-          <div className="pt-2 grid grid-cols-2 gap-2 text-[10px]">
-            <div className="p-2 rounded border border-[var(--border)] bg-[var(--bg-card)]">
-              <span className="text-[var(--text-tertiary)] block">GATE_DEPTH</span>
-              <span className="text-[var(--text-primary)] font-semibold">42 → 18 (-57%)</span>
-            </div>
-            <div className="p-2 rounded border border-[var(--border)] bg-[var(--bg-card)]">
-              <span className="text-[var(--text-tertiary)] block">CNOT_COUNT</span>
-              <span className="text-[var(--text-primary)] font-semibold">14 → 4 (-71%)</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="pt-3 border-t border-[var(--border)] flex items-center justify-between text-[11px] text-[var(--text-tertiary)]">
-          <span>BACKEND: ibm_kyoto (127Q)</span>
-          <span style={{ color: 'var(--accent)' }}>ROUTING: PASS</span>
-        </div>
-      </div>
-    );
-  }
-
-  // Full-Stack / Platform Schematic
-  return (
-    <div className="w-full h-full min-h-[260px] sm:min-h-[320px] rounded-lg border border-[var(--border)] bg-[var(--bg-tertiary)] p-4 sm:p-6 flex flex-col justify-between font-mono text-xs overflow-hidden select-none">
-      <div className="flex items-center justify-between pb-3 border-b border-[var(--border)] text-[var(--text-tertiary)]">
-        <div className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-[var(--border-hover)]" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[var(--border-hover)]" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[var(--border-hover)]" />
-        </div>
-        <span className="text-[10px] tracking-wider uppercase">api_gateway · engine</span>
-      </div>
-
-      <div className="my-auto py-3 space-y-2">
-        <div className="p-3 rounded bg-[var(--bg-card)] border border-[var(--border)] text-[11px]">
-          <p className="text-[var(--text-tertiary)] mb-1">// Query Engine</p>
-          <p className="font-semibold" style={{ color: 'var(--text-primary)' }}>
-            SELECT customer_segment, AVG(revenue)
-          </p>
-          <p className="text-[var(--text-secondary)]">FROM parquet_scan('analytics.parquet')</p>
-        </div>
-
-        <div className="flex items-center justify-between text-[11px] px-1 text-[var(--text-tertiary)]">
-          <span>PARSER: DuckDB In-Memory</span>
-          <span>EXEC_TIME: 1.8ms</span>
-        </div>
-      </div>
-
-      <div className="pt-3 border-t border-[var(--border)] flex items-center justify-between text-[11px] text-[var(--text-tertiary)]">
-        <span>STATUS: 200 OK</span>
-        <span style={{ color: 'var(--accent)' }}>● FASTAPI ACTIVE</span>
-      </div>
+      )}
     </div>
+  );
+}
+
+function ProjectCard({ project, index, inView }) {
+  // Alternating directional entrance for 1/2/3 column responsive grids
+  // index % 2 === 0 from left (-80px), index % 2 === 1 from right (+80px)
+  const isLeft = index % 2 === 0;
+  const xOffset = isLeft ? -80 : 80;
+
+  return (
+    <motion.article
+      layout
+      initial={{ opacity: 0, x: xOffset, y: 20 }}
+      animate={inView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, x: xOffset, y: 20 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{
+        duration: 0.65,
+        delay: (index % 3) * 0.12,
+        ease: [0.25, 1, 0.5, 1],
+      }}
+      whileHover={{ y: -6 }}
+      className="card group overflow-hidden flex flex-col transition-all duration-300"
+      aria-label={`Project: ${project.title}`}
+    >
+      {/* Thumbnail */}
+      <div className="overflow-hidden relative">
+        <ProjectThumbnail project={project} />
+        {project.featured && (
+          <div className="absolute top-3 left-3">
+            <span className="tag text-[10px]">⭐ Featured</span>
+          </div>
+        )}
+      </div>
+
+      {/* Content */}
+      <div className="p-5 flex flex-col flex-1 gap-3">
+        <div>
+          <h3
+            className="text-base font-bold mb-1.5 transition-colors group-hover:text-[var(--accent)]"
+            style={{ color: 'var(--text-primary)' }}
+          >
+            {project.title}
+          </h3>
+          <p className="text-sm leading-relaxed line-clamp-3" style={{ color: 'var(--text-secondary)' }}>
+            {project.description}
+          </p>
+        </div>
+
+        {/* Tech tags — show max 4, with overflow count */}
+        <div className="flex flex-wrap gap-1.5">
+          {project.technologies.slice(0, 4).map((tech) => (
+            <span
+              key={tech}
+              className={`inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium ${getTechColor(tech)}`}
+            >
+              {tech}
+            </span>
+          ))}
+          {project.technologies.length > 4 && (
+            <span
+              className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium"
+              style={{ background: 'var(--bg-tertiary)', color: 'var(--text-tertiary)' }}
+            >
+              +{project.technologies.length - 4} more
+            </span>
+          )}
+        </div>
+
+        {/* Actions */}
+        <div className="flex items-center gap-3 pt-2 border-t mt-auto" style={{ borderColor: 'var(--border)' }}>
+          {project.github && (
+            <motion.a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-1.5 text-xs font-semibold transition-colors hover:text-[var(--accent)]"
+              style={{ color: 'var(--text-secondary)' }}
+              aria-label={`View ${project.title} on GitHub`}
+            >
+              <Github className="w-4 h-4" aria-hidden="true" />
+              GitHub
+            </motion.a>
+          )}
+          {project.demo && (
+            <motion.a
+              href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-1.5 text-xs font-semibold transition-colors hover:text-[var(--accent)]"
+              style={{ color: 'var(--text-secondary)' }}
+              aria-label={`View live demo of ${project.title}`}
+            >
+              <ExternalLink className="w-4 h-4" aria-hidden="true" />
+              Live Demo
+            </motion.a>
+          )}
+        </div>
+      </div>
+    </motion.article>
   );
 }
 
 export default function Projects() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-60px' });
+  const inView = useInView(ref, { once: true, margin: '-80px' });
   const [activeCategory, setActiveCategory] = useState('all');
 
   const filtered = activeCategory === 'all'
@@ -151,157 +182,81 @@ export default function Projects() {
     : projects.filter((p) => p.category === activeCategory);
 
   return (
-    <section id="projects" className="section-padding border-b" style={{ borderColor: 'var(--border)' }} aria-labelledby="projects-heading">
+    <section id="projects" className="section-padding" aria-labelledby="projects-heading">
       <div className="section-container" ref={ref}>
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="space-y-12"
-        >
-          {/* Section Header */}
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b" style={{ borderColor: 'var(--border)' }}>
-            <div>
-              <p className="section-eyebrow">SELECTED WORK</p>
-              <h2 id="projects-heading" className="section-title">Engineered Projects</h2>
-            </div>
+        <div>
+          {/* Header - Slides in from Right */}
+          <motion.div
+            initial={{ opacity: 0, x: 60 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
+            className="text-center mb-8 sm:mb-12"
+          >
+            <p className="section-eyebrow">Projects</p>
+            <h2 id="projects-heading" className="section-title">Things I've Built</h2>
+            <p className="section-subtitle mt-2 sm:mt-3 max-w-lg mx-auto">
+              Real-world projects spanning AI/ML, intelligent data platforms, and full-stack development
+            </p>
+          </motion.div>
 
-            {/* Filter Tabs */}
-            <div className="flex flex-wrap items-center gap-1.5" role="tablist">
-              {projectCategories.map((cat) => {
-                const isActive = activeCategory === cat.id;
-                return (
-                  <button
-                    key={cat.id}
-                    onClick={() => setActiveCategory(cat.id)}
-                    role="tab"
-                    aria-selected={isActive}
-                    className="font-mono text-xs px-3 py-1.5 rounded transition-colors border"
-                    style={{
-                      backgroundColor: isActive ? 'var(--text-primary)' : 'var(--bg-card)',
-                      color: isActive ? 'var(--bg-primary)' : 'var(--text-secondary)',
-                      borderColor: isActive ? 'var(--text-primary)' : 'var(--border)',
-                    }}
-                  >
-                    {cat.label}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
+          {/* Filter tabs - Slides in from Left */}
+          <motion.div
+            initial={{ opacity: 0, x: -60 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.25, 1, 0.5, 1] }}
+            className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-8 sm:mb-10"
+            role="tablist"
+            aria-label="Filter projects by category"
+          >
+            {projectCategories.map((cat) => {
+              const isActive = activeCategory === cat.id;
+              return (
+                <motion.button
+                  key={cat.id}
+                  onClick={() => setActiveCategory(cat.id)}
+                  whileTap={{ scale: 0.95 }}
+                  role="tab"
+                  aria-selected={isActive}
+                  className={`px-3.5 py-1.5 sm:px-5 sm:py-2 rounded-xl text-[11px] sm:text-xs font-semibold transition-all duration-200 border ${
+                    isActive
+                      ? 'shadow-md'
+                      : 'hover:text-[var(--accent)]'
+                  }`}
+                  style={
+                    isActive
+                      ? {
+                          backgroundColor: 'var(--text-primary)',
+                          color: 'var(--bg-primary)',
+                          borderColor: 'var(--text-primary)',
+                        }
+                      : {
+                          background: 'var(--bg-card)',
+                          border: '1px solid var(--border)',
+                          color: 'var(--text-secondary)',
+                        }
+                  }
+                >
+                  {cat.label}
+                </motion.button>
+              );
+            })}
+          </motion.div>
 
-          {/* Editorial Alternating Layout */}
-          <div className="space-y-16 sm:space-y-24">
+          {/* Projects Grid */}
+          <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             <AnimatePresence mode="popLayout">
-              {filtered.map((project, index) => {
-                const isEven = index % 2 === 0;
-
-                return (
-                  <motion.article
-                    key={project.id}
-                    layout
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.98 }}
-                    transition={{ duration: 0.4 }}
-                    className="group grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
-                    aria-label={`Project: ${project.title}`}
-                  >
-                    {/* Editorial Text Column */}
-                    <div
-                      className={`lg:col-span-5 space-y-4 ${
-                        isEven ? 'lg:order-1' : 'lg:order-2'
-                      }`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <span className="font-mono text-xs font-semibold" style={{ color: 'var(--accent)' }}>
-                          0{index + 1}
-                        </span>
-                        <span className="inline-block w-4 h-px bg-[var(--border)]" />
-                        <span className="font-mono text-[11px] uppercase tracking-wider text-[var(--text-tertiary)]">
-                          {project.category.replace('-', ' ')}
-                        </span>
-                      </div>
-
-                      <h3
-                        className="text-xl sm:text-2xl font-semibold tracking-tight transition-colors"
-                        style={{ color: 'var(--text-primary)' }}
-                      >
-                        {project.title}
-                      </h3>
-
-                      <p
-                        className="text-xs sm:text-sm leading-relaxed font-normal"
-                        style={{ color: 'var(--text-secondary)' }}
-                      >
-                        {project.longDescription || project.description}
-                      </p>
-
-                      {/* Tech stack pills */}
-                      <div className="flex flex-wrap gap-1.5 pt-2">
-                        {project.technologies.map((tech) => (
-                          <span
-                            key={tech}
-                            className="font-mono text-[11px] px-2 py-0.5 rounded border"
-                            style={{
-                              background: 'var(--bg-tertiary)',
-                              borderColor: 'var(--border)',
-                              color: 'var(--text-secondary)',
-                            }}
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* Actions */}
-                      <div className="flex items-center gap-4 pt-4">
-                        {project.github && (
-                          <a
-                            href={project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 font-mono text-xs font-medium transition-colors hover:text-[var(--accent)]"
-                            style={{ color: 'var(--text-primary)' }}
-                            aria-label={`GitHub source for ${project.title}`}
-                          >
-                            <Github className="w-3.5 h-3.5" aria-hidden="true" />
-                            <span>Source Code</span>
-                            <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                          </a>
-                        )}
-
-                        {project.demo && (
-                          <a
-                            href={project.demo}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 font-mono text-xs font-medium transition-colors hover:text-[var(--accent)]"
-                            style={{ color: 'var(--text-primary)' }}
-                            aria-label={`Live demo for ${project.title}`}
-                          >
-                            <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
-                            <span>Live Demo</span>
-                            <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                          </a>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Visual Media Column */}
-                    <div
-                      className={`lg:col-span-7 ${
-                        isEven ? 'lg:order-2' : 'lg:order-1'
-                      }`}
-                    >
-                      <TechnicalPreview project={project} />
-                    </div>
-                  </motion.article>
-                );
-              })}
+              {filtered.map((project, index) => (
+                <ProjectCard key={project.id} project={project} index={index} inView={inView} />
+              ))}
             </AnimatePresence>
-          </div>
-        </motion.div>
+          </motion.div>
+
+          {filtered.length === 0 && (
+            <div className="text-center py-16" style={{ color: 'var(--text-tertiary)' }}>
+              <p className="text-sm">No projects in this category yet.</p>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

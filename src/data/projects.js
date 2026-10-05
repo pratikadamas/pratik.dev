@@ -29,6 +29,20 @@ export const projects = [
   },
   {
     id: 3,
+    title: "Semantic Vector Search & RAG Engine",
+    description:
+      "A high-performance semantic search and Retrieval-Augmented Generation (RAG) system using Qdrant and Pinecone vector stores, sentence embeddings, and Streamlit for contextual knowledge retrieval.",
+    longDescription:
+      "Engineered vector embeddings indexing pipeline with fast cosine similarity retrieval. Features hybrid dense-sparse vector search, metadata filtering, and an interactive Streamlit analytics dashboard.",
+    technologies: ["Python", "FastAPI", "Pinecone", "Qdrant", "Streamlit"],
+    category: "ai-ml",
+    image: null,
+    github: "https://github.com/pratikadamas/vector-rag-engine",
+    demo: null,
+    featured: true,
+  },
+  {
+    id: 4,
     title: "MediBook",
     description:
       "A healthcare appointment booking platform designed to simplify doctor discovery, appointment scheduling, and patient-doctor management with a clean, accessible interface.",
@@ -42,7 +56,7 @@ export const projects = [
     featured: false,
   },
   {
-    id: 4,
+    id: 5,
     title: "Course Enrollment System",
     description:
       "A web-based course enrollment system for managing student course registration, academic data, and enrollment workflows in an educational institution.",
@@ -55,26 +69,11 @@ export const projects = [
     demo: null,
     featured: false,
   },
-  {
-    id: 5,
-    title: "Quantum Circuit Transpiler",
-    description:
-      "Exploring quantum circuit transpilation, qubit mapping, gate decomposition, and circuit optimization for quantum hardware backends using Qiskit.",
-    longDescription:
-      "Research-focused project implementing custom transpilation passes, qubit routing algorithms, and gate synthesis for NISQ device compatibility.",
-    technologies: ["Python", "Qiskit", "Quantum Computing", "Linear Algebra"],
-    category: "quantum",
-    image: null,
-    github: "https://github.com/pratikadamas/quantum-transpiler",
-    demo: null,
-    featured: true,
-  },
 ];
 
 export const projectCategories = [
   { id: "all", label: "All" },
   { id: "ai-ml", label: "AI / ML" },
   { id: "full-stack", label: "Full Stack" },
-  { id: "quantum", label: "Quantum" },
   { id: "other", label: "Other" },
 ];
