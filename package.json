@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node ./scripts/syncCertificates.js",
     "build": "vite build",
+    "sync:certs": "node ./scripts/syncCertificates.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
