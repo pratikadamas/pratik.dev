@@ -8,12 +8,12 @@ export default function CustomCursor() {
   const [cursorText, setCursorText] = useState('');
   const [isTouchDevice, setIsTouchDevice] = useState(false);
 
-  // Raw mouse coordinates
+  // Raw mouse coordinates (instant, zero-lag dot)
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
 
-  // Smooth springs for outer follower ring
-  const springConfig = { damping: 25, stiffness: 250, mass: 0.5 };
+  // Smooth spring physics for outer follower ring
+  const springConfig = { damping: 24, stiffness: 280, mass: 0.3 };
   const followerX = useSpring(mouseX, springConfig);
   const followerY = useSpring(mouseY, springConfig);
 
@@ -43,7 +43,7 @@ export default function CustomCursor() {
     const handleMouseOver = (e) => {
       const target = e.target;
       const interactiveEl = target.closest(
-        'a, button, input, textarea, select, [role="button"], .interactive-hover, .card, .tag, [data-cursor]'
+        'a, button, input, textarea, select, [role="button"], .card, .tag, [data-cursor]'
       );
 
       if (interactiveEl) {
@@ -77,9 +77,9 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Outer Follower Ring */}
+      {/* Outer Spring Follower Ring */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full flex items-center justify-center mix-blend-difference"
+        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full flex items-center justify-center"
         style={{
           x: followerX,
           y: followerY,
@@ -87,22 +87,22 @@ export default function CustomCursor() {
           translateY: '-50%',
         }}
         animate={{
-          width: isHovered ? (cursorText ? 64 : 44) : 32,
-          height: isHovered ? (cursorText ? 64 : 44) : 32,
+          width: isHovered ? (cursorText ? 64 : 46) : 32,
+          height: isHovered ? (cursorText ? 64 : 46) : 32,
           scale: isClicked ? 0.85 : 1,
-          backgroundColor: isHovered ? 'rgba(255, 255, 255, 0.15)' : 'transparent',
-          borderWidth: isHovered ? '1.5px' : '1.5px',
-          borderColor: isHovered ? 'rgba(255, 255, 255, 0.8)' : 'rgba(99, 102, 241, 0.6)',
+          backgroundColor: isHovered ? 'rgba(52, 211, 153, 0.12)' : 'transparent',
+          borderWidth: isHovered ? '2px' : '1.5px',
+          borderColor: isHovered ? 'rgba(52, 211, 153, 0.9)' : 'rgba(52, 211, 153, 0.5)',
         }}
         transition={{
           type: 'spring',
-          damping: 20,
-          stiffness: 300,
+          damping: 22,
+          stiffness: 320,
           mass: 0.2,
         }}
       >
         {cursorText && (
-          <span className="text-[10px] font-mono tracking-wider uppercase text-white font-semibold select-none">
+          <span className="text-[10px] font-mono tracking-wider uppercase text-emerald-300 font-bold select-none">
             {cursorText}
           </span>
         )}
@@ -110,12 +110,14 @@ export default function CustomCursor() {
 
       {/* Center Precise Dot */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full bg-indigo-500 shadow-[0_0_10px_rgba(99,102,241,0.8)]"
+        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full"
         style={{
           x: mouseX,
           y: mouseY,
           translateX: '-50%',
           translateY: '-50%',
+          backgroundColor: '#34D399',
+          boxShadow: '0 0 10px rgba(52, 211, 153, 0.95)',
         }}
         animate={{
           width: isHovered ? 6 : 8,

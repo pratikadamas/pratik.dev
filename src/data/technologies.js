@@ -49,6 +49,7 @@ export const techCategories = [
       { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg", tag: "Style" },
       { name: "REST APIs", icon: null, tag: "API", emoji: "🔗" },
       { name: "Flask", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg", tag: "Backend" },
+      { name: "FastAPI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg", tag: "API" },
     ],
   },
   {

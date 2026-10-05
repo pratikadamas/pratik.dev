@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -9,6 +8,7 @@ import Certificates from './components/Certificates';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
+import CustomCursor from './components/CustomCursor';
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -34,6 +34,9 @@ function App() {
 
   return (
     <>
+      {/* Butter-Smooth Custom Animated Cursor */}
+      <CustomCursor />
+
       {/* Scroll Progress & Back to Top */}
       <ScrollToTop />
 
@@ -63,4 +66,3 @@ function App() {
 }
 
 export default App;
-

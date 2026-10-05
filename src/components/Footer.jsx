@@ -60,7 +60,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-xs sm:text-sm leading-relaxed max-w-xs font-normal" style={{ color: 'var(--text-secondary)' }}>
-              Final-year CSE student building AI systems, full-stack applications, and scalable data solutions.
+              B.Tech CSE student (2023–2027) building AI systems, full-stack applications, and scalable data solutions.
             </p>
           </div>
 

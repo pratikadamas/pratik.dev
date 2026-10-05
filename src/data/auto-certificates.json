@@ -37,15 +37,6 @@
   },
   {
     "id": 5,
-    "title": "Programming in Modern C++",
-    "organization": "NPTEL Elite (IIT Kharagpur)",
-    "date": "2024",
-    "image": "/certificates/C++ NPTEL.jpg",
-    "credentialUrl": "#",
-    "category": "Programming"
-  },
-  {
-    "id": 6,
     "title": "Coding & Problem Solving",
     "organization": "Adamas University",
     "date": "2024",
@@ -54,13 +45,22 @@
     "category": "Programming"
   },
   {
-    "id": 7,
+    "id": 6,
     "title": "Computer Vision",
     "organization": "Verified Issuer",
     "date": "2026",
     "image": "/certificates/Computer Vision.png",
     "credentialUrl": "#",
     "category": "Certification"
+  },
+  {
+    "id": 7,
+    "title": "Cpp NPTEL",
+    "organization": "NPTEL Elite",
+    "date": "2026",
+    "image": "/certificates/Cpp NPTEL.jpg",
+    "credentialUrl": "#",
+    "category": "Programming"
   },
   {
     "id": 8,
@@ -109,6 +109,15 @@
   },
   {
     "id": 13,
+    "title": "Machine learning & Data science for Business",
+    "organization": "AI & ML Credential",
+    "date": "2026",
+    "image": "/certificates/Machine learning & Data science for Business.jpg",
+    "credentialUrl": "#",
+    "category": "AI/ML"
+  },
+  {
+    "id": 14,
     "title": "Machine Learning Algorithms",
     "organization": "Great Learning",
     "date": "2024",
@@ -117,7 +126,7 @@
     "category": "AI/ML"
   },
   {
-    "id": 14,
+    "id": 15,
     "title": "AI For Youth & Digital Skills",
     "organization": "Intel & Skill India",
     "date": "2023",
@@ -126,21 +135,12 @@
     "category": "Government"
   },
   {
-    "id": 15,
+    "id": 16,
     "title": "JavaScript, jQuery & TypeScript: Full-Stack",
     "organization": "Udemy",
     "date": "2024",
     "image": "/certificates/Udemy-jQuery.jpg",
     "credentialUrl": "#",
     "category": "Web Dev"
-  },
-  {
-    "id": 16,
-    "title": "QuizOff 2026 - India's Biggest AI Quiz",
-    "organization": "Unstop & CampusCrew",
-    "date": "2026",
-    "image": "/certificates/Unstop.jpeg",
-    "credentialUrl": "#",
-    "category": "Competitions"
   }
 ]

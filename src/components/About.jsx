@@ -48,7 +48,7 @@ export default function About() {
               <h2 id="about-heading" className="section-title">Background & Core Focus</h2>
             </div>
             <p className="text-xs font-mono" style={{ color: 'var(--text-tertiary)' }}>
-              [B.Tech CSE · 2022–2026]
+              [B.Tech CSE · 2023–2027]
             </p>
           </div>
 
