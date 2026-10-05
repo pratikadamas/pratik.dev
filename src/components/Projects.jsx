@@ -68,14 +68,24 @@ function ProjectThumbnail({ project }) {
 }
 
 function ProjectCard({ project, index }) {
+  // Alternating directional entrance for 1/2/3 column responsive grids
+  // index % 2 === 0 from left (-60px), index % 2 === 1 from right (+60px)
+  const xOffset = index % 2 === 0 ? -60 : 60;
+
   return (
     <motion.article
       layout
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 20, scale: 0.95 }}
-      transition={{ duration: 0.4, delay: index * 0.08 }}
-      className="card group overflow-hidden flex flex-col"
+      initial={{ opacity: 0, x: xOffset, y: 20 }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{
+        duration: 0.6,
+        delay: (index % 3) * 0.1,
+        ease: [0.25, 1, 0.5, 1],
+      }}
+      whileHover={{ y: -6 }}
+      className="card group overflow-hidden flex flex-col transition-all duration-300"
       aria-label={`Project: ${project.title}`}
     >
       {/* Thumbnail */}
@@ -121,7 +131,7 @@ function ProjectCard({ project, index }) {
         </div>
 
         {/* Actions */}
-        <div className="flex items-center gap-3 pt-2 border-t" style={{ borderColor: 'var(--border)' }}>
+        <div className="flex items-center gap-3 pt-2 border-t mt-auto" style={{ borderColor: 'var(--border)' }}>
           {project.github && (
             <motion.a
               href={project.github}
@@ -170,22 +180,30 @@ export default function Projects() {
   return (
     <section id="projects" className="section-padding" aria-labelledby="projects-heading">
       <div className="section-container" ref={ref}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-        >
-          {/* Header */}
-          <div className="text-center mb-12">
+        <div>
+          {/* Header - Slides in from Right */}
+          <motion.div
+            initial={{ opacity: 0, x: 60 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
+            className="text-center mb-12"
+          >
             <p className="text-xs font-mono font-medium text-primary-500 mb-2 tracking-wider uppercase">Projects</p>
             <h2 id="projects-heading" className="section-title">Things I've Built</h2>
             <p className="section-subtitle mt-3 max-w-lg mx-auto">
               Real-world projects spanning AI/ML, full-stack development, and quantum computing
             </p>
-          </div>
+          </motion.div>
 
-          {/* Filter tabs */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mb-10" role="tablist" aria-label="Filter projects by category">
+          {/* Filter tabs - Slides in from Left */}
+          <motion.div
+            initial={{ opacity: 0, x: -60 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.25, 1, 0.5, 1] }}
+            className="flex flex-wrap items-center justify-center gap-2 mb-10"
+            role="tablist"
+            aria-label="Filter projects by category"
+          >
             {projectCategories.map((cat) => (
               <motion.button
                 key={cat.id}
@@ -207,7 +225,7 @@ export default function Projects() {
                 {cat.label}
               </motion.button>
             ))}
-          </div>
+          </motion.div>
 
           {/* Projects Grid */}
           <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -223,7 +241,7 @@ export default function Projects() {
               <p className="text-sm">No projects in this category yet.</p>
             </div>
           )}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

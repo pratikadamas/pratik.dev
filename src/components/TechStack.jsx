@@ -98,23 +98,30 @@ export default function TechStack() {
   return (
     <section id="tech" className="section-padding" style={{ background: 'var(--bg-secondary)' }} aria-labelledby="tech-heading">
       <div className="section-container" ref={ref}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="space-y-10"
-        >
-          {/* Header */}
-          <div className="text-center">
+        <div className="space-y-10">
+          {/* Header - Slides in from Left */}
+          <motion.div
+            initial={{ opacity: 0, x: -60 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
+            className="text-center"
+          >
             <p className="text-xs font-mono font-medium text-primary-500 mb-2 tracking-wider uppercase">Tech Stack</p>
             <h2 id="tech-heading" className="section-title">Technologies I Work With</h2>
             <p className="section-subtitle mt-3 max-w-lg mx-auto">
               From machine learning to quantum circuits — my toolkit spans multiple domains
             </p>
-          </div>
+          </motion.div>
 
-          {/* Category Filter Tabs */}
-          <div className="flex flex-wrap items-center justify-center gap-2" role="tablist" aria-label="Filter technologies by category">
+          {/* Category Filter Tabs - Slides in from Right */}
+          <motion.div
+            initial={{ opacity: 0, x: 60 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.25, 1, 0.5, 1] }}
+            className="flex flex-wrap items-center justify-center gap-2"
+            role="tablist"
+            aria-label="Filter technologies by category"
+          >
             {filterTabs.map((tab) => {
               const isActive = activeCategory === tab.id;
               const catData = techCategories.find(c => c.id === tab.id);
@@ -142,7 +149,7 @@ export default function TechStack() {
                 </motion.button>
               );
             })}
-          </div>
+          </motion.div>
 
           {/* Count badge */}
           <div className="flex items-center justify-center gap-2">
@@ -166,7 +173,7 @@ export default function TechStack() {
               ))}
             </AnimatePresence>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
