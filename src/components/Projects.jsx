@@ -44,21 +44,21 @@ function ProjectThumbnail({ project }) {
   };
 
   return (
-    <div className={`w-full h-48 bg-gradient-to-br ${categoryBg[project.category] || 'from-gray-500/20 to-gray-600/20'} flex items-center justify-center`}>
+    <div className={`w-full h-48 bg-gradient-to-br ${categoryBg[project.category] || 'from-gray-500/20 to-gray-600/20'} flex items-center justify-center overflow-hidden relative`}>
       {project.image ? (
         <img
           src={project.image}
           alt={`${project.title} thumbnail`}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           loading="lazy"
         />
       ) : (
-        <div className="flex flex-col items-center gap-3">
+        <div className="flex flex-col items-center gap-3 transition-transform duration-500 group-hover:scale-110">
           <span className="text-5xl" role="img" aria-label={project.category}>
             {categoryIcon[project.category] || '💻'}
           </span>
-          <span className="text-xs font-mono font-medium px-3 py-1 rounded-full"
-            style={{ background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.7)' }}>
+          <span className="text-xs font-mono font-medium px-3 py-1 rounded-full transition-colors group-hover:bg-primary-500/20"
+            style={{ background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.8)' }}>
             {project.category.replace('-', ' ').toUpperCase()}
           </span>
         </div>
