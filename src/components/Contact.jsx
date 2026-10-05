@@ -100,11 +100,75 @@ export default function Contact() {
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 items-start">
-            {/* Left: Contact Form */}
+            {/* Left: Contact info + Social media */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
+              className="space-y-8"
+            >
+              {/* Direct contact info */}
+              <div>
+                <h3 className="text-sm font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Direct Contact</h3>
+                <div className="space-y-3">
+                  <a
+                    href={`mailto:${contactInfo.email}`}
+                    className="flex items-center gap-3 p-4 rounded-xl group transition-all duration-200"
+                    style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}
+                    aria-label={`Send email to ${contactInfo.email}`}
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-primary-500/10 flex items-center justify-center flex-shrink-0">
+                      <Mail className="w-5 h-5 text-primary-500" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>Email Me</p>
+                      <p className="text-sm font-bold group-hover:text-primary-500 transition-colors" style={{ color: 'var(--text-primary)' }}>
+                        {contactInfo.email}
+                      </p>
+                    </div>
+                  </a>
+
+                  <div
+                    className="flex items-center gap-3 p-4 rounded-xl"
+                    style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-accent-500/10 flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-5 h-5 text-accent-500" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>Location</p>
+                      <p className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>{contactInfo.location}</p>
+                    </div>
+                  </div>
+
+                  <div
+                    className="flex items-center gap-3 p-4 rounded-xl"
+                    style={{ background: 'rgba(16,185,129,0.05)', border: '1px solid rgba(16,185,129,0.2)' }}
+                  >
+                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse flex-shrink-0 ml-3.5" />
+                    <div>
+                      <p className="text-sm font-medium text-emerald-600 dark:text-emerald-400">{contactInfo.availability}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Social links */}
+              <div>
+                <h3 className="text-sm font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Find Me Online</h3>
+                <div className="grid grid-cols-2 gap-3">
+                  {socialLinks.map((social) => (
+                    <SocialCard key={social.id} social={social} />
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Right: Mail / Contact Form Section */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.3 }}
             >
               <div className="card p-6">
                 <h3 className="text-base font-bold mb-6" style={{ color: 'var(--text-primary)' }}>Send Me a Message</h3>
@@ -213,70 +277,6 @@ export default function Contact() {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
-            </motion.div>
-
-            {/* Right: Contact info + Social links */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="space-y-8"
-            >
-              {/* Direct contact */}
-              <div>
-                <h3 className="text-sm font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Direct Contact</h3>
-                <div className="space-y-3">
-                  <a
-                    href={`mailto:${contactInfo.email}`}
-                    className="flex items-center gap-3 p-4 rounded-xl group transition-all duration-200"
-                    style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}
-                    aria-label={`Send email to ${contactInfo.email}`}
-                  >
-                    <div className="w-10 h-10 rounded-xl bg-primary-500/10 flex items-center justify-center flex-shrink-0">
-                      <Mail className="w-5 h-5 text-primary-500" aria-hidden="true" />
-                    </div>
-                    <div>
-                      <p className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>Email Me</p>
-                      <p className="text-sm font-bold group-hover:text-primary-500 transition-colors" style={{ color: 'var(--text-primary)' }}>
-                        {contactInfo.email}
-                      </p>
-                    </div>
-                  </a>
-
-                  <div
-                    className="flex items-center gap-3 p-4 rounded-xl"
-                    style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}
-                  >
-                    <div className="w-10 h-10 rounded-xl bg-accent-500/10 flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-5 h-5 text-accent-500" aria-hidden="true" />
-                    </div>
-                    <div>
-                      <p className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>Location</p>
-                      <p className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>{contactInfo.location}</p>
-                    </div>
-                  </div>
-
-                  <div
-                    className="flex items-center gap-3 p-4 rounded-xl"
-                    style={{ background: 'rgba(16,185,129,0.05)', border: '1px solid rgba(16,185,129,0.2)' }}
-                  >
-                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse flex-shrink-0 ml-3.5" />
-                    <div>
-                      <p className="text-sm font-medium text-emerald-600 dark:text-emerald-400">{contactInfo.availability}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Social links */}
-              <div>
-                <h3 className="text-sm font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Find Me Online</h3>
-                <div className="grid grid-cols-2 gap-3">
-                  {socialLinks.map((social) => (
-                    <SocialCard key={social.id} social={social} />
-                  ))}
-                </div>
               </div>
             </motion.div>
           </div>
