@@ -10,13 +10,9 @@ import Achievements from './components/Achievements';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
-import PageLoader from './components/PageLoader';
 import ScrollToTop from './components/ScrollToTop';
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Initialize dark mode from localStorage, default to dark
   const [darkMode, setDarkMode] = useState(() => {
     try {
       const stored = localStorage.getItem('theme');
@@ -40,11 +36,6 @@ function App() {
 
   return (
     <>
-      {/* Loading Animation Splash Screen */}
-      <AnimatePresence mode="wait">
-        {isLoading && <PageLoader onLoadingComplete={() => setIsLoading(false)} />}
-      </AnimatePresence>
-
       {/* Smooth Dynamic Custom Cursor */}
       <CustomCursor />
 
