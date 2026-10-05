@@ -31,13 +31,13 @@ function SocialCard({ social }) {
       href={social.url}
       target="_blank"
       rel="noopener noreferrer"
-      whileHover={{ y: -4, scale: 1.02 }}
+      whileHover={{ y: -3, scale: 1.03 }}
       whileTap={{ scale: 0.97 }}
-      className="card p-4 flex items-center gap-4 group transition-all duration-300"
+      className="card p-3.5 flex items-center gap-3 group transition-all duration-300"
       aria-label={`Visit ${social.name} profile`}
     >
       <div
-        className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300"
+        className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300"
         style={{
           background: `${social.color}15`,
           border: `1px solid ${social.color}30`,
@@ -47,14 +47,9 @@ function SocialCard({ social }) {
         {Icon}
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>{social.name}</p>
-        <p className="text-xs truncate" style={{ color: 'var(--text-tertiary)' }}>{social.handle}</p>
+        <p className="text-xs font-bold" style={{ color: 'var(--text-primary)' }}>{social.name}</p>
+        <p className="text-[10px] truncate" style={{ color: 'var(--text-tertiary)' }}>{social.handle}</p>
       </div>
-      <ExternalLink
-        className="w-4 h-4 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"
-        style={{ color: 'var(--text-tertiary)' }}
-        aria-hidden="true"
-      />
     </motion.a>
   );
 }
@@ -277,7 +272,7 @@ export default function Contact() {
               {/* Social links */}
               <div>
                 <h3 className="text-sm font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Find Me Online</h3>
-                <div className="space-y-3">
+                <div className="grid grid-cols-2 gap-3">
                   {socialLinks.map((social) => (
                     <SocialCard key={social.id} social={social} />
                   ))}
