@@ -19,16 +19,23 @@ const filterTabs = [
 
 function TechCard({ tech, index }) {
   const [imgError, setImgError] = useState(false);
+  // Alternating entrance direction: even from left (-40px), odd from right (+40px)
+  const xOffset = index % 2 === 0 ? -40 : 40;
 
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 20, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
+      initial={{ opacity: 0, x: xOffset, y: 15 }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
       exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.3, delay: index * 0.03 }}
-      whileHover={{ y: -5, scale: 1.04 }}
-      className="group flex flex-col items-center gap-2.5 p-4 rounded-xl cursor-default"
+      transition={{
+        duration: 0.5,
+        delay: (index % 8) * 0.05,
+        ease: [0.25, 1, 0.5, 1],
+      }}
+      whileHover={{ y: -6, scale: 1.05 }}
+      className="group flex flex-col items-center gap-2.5 p-4 rounded-xl cursor-default transition-shadow"
       style={{
         background: 'var(--bg-card)',
         border: '1px solid var(--border)',
