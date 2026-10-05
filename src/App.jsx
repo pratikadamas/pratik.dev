@@ -9,7 +9,6 @@ import Certificates from './components/Certificates';
 import Achievements from './components/Achievements';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import CustomCursor from './components/CustomCursor';
 import ScrollToTop from './components/ScrollToTop';
 
 function App() {
@@ -36,9 +35,6 @@ function App() {
 
   return (
     <>
-      {/* Smooth Dynamic Custom Cursor */}
-      <CustomCursor />
-
       {/* Scroll Progress & Back to Top */}
       <ScrollToTop />
 

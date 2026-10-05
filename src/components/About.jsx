@@ -1,90 +1,91 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Brain, Globe, Atom, Wrench } from 'lucide-react';
 
-const interests = [
-  { icon: Brain, label: 'Artificial Intelligence & ML', color: 'text-purple-500' },
-  { icon: Globe, label: 'Full-Stack Development', color: 'text-emerald-500' },
-  { icon: Atom, label: 'Quantum Computing', color: 'text-cyan-500' },
-  { icon: Wrench, label: 'Software Engineering', color: 'text-orange-500' },
+const focusAreas = [
+  {
+    index: '01',
+    title: 'AI & Machine Learning',
+    description:
+      'Designing applied vision systems and predictive models using Python, PyTorch, YOLO, and OpenCV. Experienced in OCR pipelines and LLM-assisted analytics.',
+  },
+  {
+    index: '02',
+    title: 'Full-Stack Engineering',
+    description:
+      'Architecting responsive web applications with React, Node.js, FastAPI, and Flask. Strong emphasis on type safety, clean REST APIs, and database performance.',
+  },
+  {
+    index: '03',
+    title: 'Quantum Computing',
+    description:
+      'Researching quantum circuit transpilation, qubit routing, and gate synthesis using Qiskit. Exploring computational efficiency on noisy intermediate-scale quantum devices.',
+  },
+  {
+    index: '04',
+    title: 'Systems & Algorithmic Rigor',
+    description:
+      'Firm grounding in data structures, algorithms, and systems programming across C, Modern C++, and Java, backed by NPTEL Elite certifications from IIT Kharagpur.',
+  },
 ];
-
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-};
 
 export default function About() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
+  const inView = useInView(ref, { once: true, margin: '-60px' });
 
   return (
-    <section id="about" className="section-padding" aria-labelledby="about-heading">
+    <section id="about" className="section-padding border-b" style={{ borderColor: 'var(--border)' }} aria-labelledby="about-heading">
       <div className="section-container" ref={ref}>
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="space-y-12"
         >
-          {/* Header */}
-          <motion.div variants={itemVariants} className="text-center mb-16">
-            <p className="text-xs font-mono font-medium text-primary-500 mb-2 tracking-wider uppercase">About Me</p>
-            <h2 id="about-heading" className="section-title">Who I Am</h2>
-            <p className="section-subtitle mt-3 max-w-xl mx-auto">
-              A curious builder at the intersection of AI, software, and quantum computing
+          {/* Section Header */}
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b" style={{ borderColor: 'var(--border)' }}>
+            <div>
+              <p className="section-eyebrow">ABOUT</p>
+              <h2 id="about-heading" className="section-title">Background & Core Focus</h2>
+            </div>
+            <p className="text-xs font-mono" style={{ color: 'var(--text-tertiary)' }}>
+              [B.Tech CSE · 2022–2026]
             </p>
-          </motion.div>
+          </div>
 
-          {/* Main content: Bio and Interests */}
-          <div className="max-w-4xl mx-auto mb-16">
-            <motion.div variants={itemVariants} className="space-y-10">
-              {/* Bio */}
-              <div className="space-y-4 sm:space-y-6 text-center sm:text-left text-sm sm:text-base lg:text-lg">
-                <p className="leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                  I'm <strong style={{ color: 'var(--text-primary)' }}>Pratik Giri</strong>, a final-year Computer Science Engineering student
-                  with a deep passion for building intelligent systems and scalable software. I thrive at the
-                  intersection of <strong style={{ color: 'var(--text-primary)' }}>Artificial Intelligence</strong>,{' '}
-                  <strong style={{ color: 'var(--text-primary)' }}>Full-Stack Development</strong>, and{' '}
-                  <strong style={{ color: 'var(--text-primary)' }}>Quantum Computing</strong>.
-                </p>
-                <p className="leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                  I approach problems with both engineering rigor and research curiosity — whether it's designing
-                  a real-time license plate recognition system, building an AI-powered data analysis platform,
-                  or exploring quantum circuit transpilation.
-                </p>
-                <p className="leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                  I believe great software requires deep technical understanding, clean architecture,
-                  and a relentless focus on user experience.
-                </p>
-              </div>
+          {/* Narrative Paragraph */}
+          <div className="max-w-3xl space-y-4 text-sm sm:text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+            <p>
+              I am <strong className="font-semibold" style={{ color: 'var(--text-primary)' }}>Pratik Giri</strong>, an engineer with an analytical approach to software development. Rather than viewing machine learning and software engineering in silos, I focus on the entire lifecycle — from data ingestion and algorithm design to reliable backend infrastructure and intuitive user interfaces.
+            </p>
+            <p>
+              Whether deploying automated license plate recognition at the edge, building data intelligence tools, or investigating transpiler passes for quantum circuits, my goal is always to deliver clean code, measurable performance, and robust architecture.
+            </p>
+          </div>
 
-              {/* Interests */}
-              <div className="pt-6 sm:pt-8 border-t" style={{ borderColor: 'var(--border)' }}>
-                <h3 className="text-center sm:text-left text-lg sm:text-xl font-bold mb-6 sm:mb-8" style={{ color: 'var(--text-primary)' }}>What I'm Interested In</h3>
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-                  {interests.map((interest) => {
-                    const Icon = interest.icon;
-                    return (
-                      <motion.div
-                        key={interest.label}
-                        whileHover={{ scale: 1.05, y: -4 }}
-                        className="card p-3.5 sm:p-5 flex flex-col items-center text-center gap-2 sm:gap-4 cursor-default group transition-all duration-300"
-                      >
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center bg-slate-100 dark:bg-slate-800 group-hover:scale-110 transition-transform">
-                          <Icon className={`w-5 h-5 sm:w-6 sm:h-6 ${interest.color}`} aria-hidden="true" />
-                        </div>
-                        <span className="text-xs sm:text-sm font-semibold leading-tight" style={{ color: 'var(--text-primary)' }}>{interest.label}</span>
-                      </motion.div>
-                    );
-                  })}
+          {/* Focus Areas Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px rounded-xl overflow-hidden border" style={{ backgroundColor: 'var(--border)', borderColor: 'var(--border)' }}>
+            {focusAreas.map((area) => (
+              <div
+                key={area.index}
+                className="p-6 sm:p-8 flex flex-col justify-between transition-colors"
+                style={{ backgroundColor: 'var(--bg-card)' }}
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <span className="font-mono text-xs font-medium" style={{ color: 'var(--accent)' }}>
+                    {area.index}
+                  </span>
+                  <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: 'var(--border)' }} />
+                </div>
+                <div>
+                  <h3 className="text-base font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
+                    {area.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                    {area.description}
+                  </p>
                 </div>
               </div>
-            </motion.div>
+            ))}
           </div>
         </motion.div>
       </div>

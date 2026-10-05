@@ -1,123 +1,87 @@
-// Add, remove, or edit achievements as needed.
-// Each achievement has: title, description, icon, date, category, highlight
-
+// Real verified milestones and achievements
 export const achievements = [
   {
     id: 1,
-    title: "Add Your Achievement",
-    description: "Describe your achievement here — e.g., rank in a competition, hackathon win, academic excellence, etc.",
-    icon: "Trophy",
-    date: "Year",
-    category: "Academic",
-    highlight: false,
+    year: "2024",
+    title: "ISRO Bharatiya Antariksh Hackathon 2024",
+    issuer: "Indian Space Research Organisation (ISRO)",
+    description: "Competed in the national space technology hackathon focusing on applied engineering, data pipelines, and space application development.",
+    category: "Hackathon",
   },
   {
     id: 2,
-    title: "Add Your Achievement",
-    description: "Describe your achievement here — e.g., GATE score, competitive programming rank, research paper, etc.",
-    icon: "Star",
-    date: "Year",
-    category: "Competitive",
-    highlight: false,
+    year: "2024",
+    title: "NPTEL Elite Certification — Programming in Modern C++",
+    issuer: "IIT Kharagpur / Ministry of Education",
+    description: "Rigorous coursework and proctored examination covering modern C++ standard features, object models, memory management, and STL.",
+    category: "Academic",
   },
   {
     id: 3,
-    title: "Add Your Achievement",
-    description: "Describe your achievement here — e.g., internship experience, open-source contribution, etc.",
-    icon: "Briefcase",
-    date: "Year",
-    category: "Experience",
-    highlight: false,
+    year: "2024",
+    title: "NPTEL Elite Certification — Problem Solving Through Programming in C",
+    issuer: "IIT Kharagpur / Ministry of Education",
+    description: "Demonstrated strong core algorithmic problem solving, pointers, low-level memory control, and systems programming fundamentals.",
+    category: "Academic",
   },
   {
     id: 4,
-    title: "Add Your Achievement",
-    description: "Describe your achievement here — e.g., hackathon participation, project recognition, etc.",
-    icon: "Zap",
-    date: "Year",
-    category: "Hackathon",
-    highlight: false,
+    year: "2024",
+    title: "NPTEL Elite Certification — Data Structures & Algorithms Using Java",
+    issuer: "IIT Kharagpur / Ministry of Education",
+    description: "Mastery of algorithm analysis, asymptotic complexity, tree/graph algorithms, and object-oriented implementations in Java.",
+    category: "Academic",
+  },
+  {
+    id: 5,
+    year: "2024",
+    title: "AWS Academy Graduate — Cloud, Data & Machine Learning",
+    issuer: "Amazon Web Services (AWS)",
+    description: "Completed comprehensive AWS Academy training tracks across Cloud Operations, Data Engineering, and Machine Learning Foundations.",
+    category: "Certification",
+  },
+  {
+    id: 6,
+    year: "2026",
+    title: "QuizOff 2026 — India's Biggest AI Quiz",
+    issuer: "Unstop & CampusCrew",
+    description: "National-level competition testing machine learning fundamentals, deep learning concepts, and AI systems knowledge.",
+    category: "Competition",
   },
 ];
 
-export const achievementCategories = ["All", "Academic", "Competitive", "Experience", "Hackathon"];
-
-// Social links
+// Social links with minimal metadata
 export const socialLinks = [
   {
     id: "github",
     name: "GitHub",
-    username: "pratikadamas",
     url: "https://github.com/pratikadamas",
-    handle: "github.com/pratikadamas",
-    color: "#333",
-    darkColor: "#f1f5f9",
-    bgHover: "hover:bg-gray-100 dark:hover:bg-gray-800",
+    handle: "@pratikadamas",
   },
   {
     id: "linkedin",
     name: "LinkedIn",
-    username: "pratik-giri-745b51291",
     url: "https://linkedin.com/in/pratik-giri-745b51291/",
-    handle: "linkedin.com/in/pratik-giri-745b51291",
-    color: "#0A66C2",
-    bgHover: "hover:bg-blue-50 dark:hover:bg-blue-900/20",
+    handle: "pratik-giri",
   },
   {
     id: "leetcode",
     name: "LeetCode",
-    username: "pratik_giri2024",
     url: "https://www.leetcode.com/pratik_giri2024",
-    handle: "leetcode.com/pratik_giri2024",
-    color: "#FFA116",
-    bgHover: "hover:bg-amber-50 dark:hover:bg-amber-900/20",
+    handle: "pratik_giri2024",
   },
   {
     id: "kaggle",
     name: "Kaggle",
-    username: "pratikgiri2024",
     url: "https://kaggle.com/pratikgiri2024",
-    handle: "kaggle.com/pratikgiri2024",
-    color: "#20BEFF",
-    bgHover: "hover:bg-sky-50 dark:hover:bg-sky-900/20",
+    handle: "pratikgiri2024",
   },
 ];
 
-// Contact info
 export const contactInfo = {
-  email: "your.email@example.com", // Replace with your actual email
-  location: "India",
-  availability: "Open to internships & opportunities",
+  email: "pratikgiri933@gmail.com",
+  location: "Kolkata, India",
+  role: "Final-year Computer Science Engineering Student",
+  institution: "Adamas University",
+  availability: "Open to full-time engineering roles, internships & research collaborations",
 };
-
-// Timeline / Journey
-export const timeline = [
-  {
-    year: "2022",
-    title: "Started B.E. in Computer Science",
-    description: "Began the journey at college, exploring programming fundamentals, data structures, and algorithms.",
-    icon: "GraduationCap",
-    type: "education",
-  },
-  {
-    year: "2023",
-    title: "Dived into AI/ML & Full-Stack",
-    description: "Built first ML models, learned React and Node.js, started contributing to projects.",
-    icon: "Code2",
-    type: "skill",
-  },
-  {
-    year: "2024",
-    title: "Real-World Projects",
-    description: "Built ANPR system, AI data platform, and healthcare app. Explored quantum computing.",
-    icon: "Rocket",
-    type: "project",
-  },
-  {
-    year: "2025",
-    title: "Final Year & Research",
-    description: "Final year CSE student, focusing on AI research, quantum transpilation, and building impactful software.",
-    icon: "Star",
-    type: "current",
-  },
-];

@@ -1,89 +1,68 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Trophy, Star, Briefcase, Zap, GraduationCap, Award } from 'lucide-react';
 import { achievements } from '../data/achievements';
-
-const iconMap = {
-  Trophy, Star, Briefcase, Zap, GraduationCap, Award,
-};
-
-const categoryColors = {
-  Academic: { bg: 'bg-blue-500/10', text: 'text-blue-500', border: 'border-blue-500/20' },
-  Competitive: { bg: 'bg-amber-500/10', text: 'text-amber-500', border: 'border-amber-500/20' },
-  Experience: { bg: 'bg-emerald-500/10', text: 'text-emerald-500', border: 'border-emerald-500/20' },
-  Hackathon: { bg: 'bg-purple-500/10', text: 'text-purple-500', border: 'border-purple-500/20' },
-  Research: { bg: 'bg-cyan-500/10', text: 'text-cyan-500', border: 'border-cyan-500/20' },
-  default: { bg: 'bg-primary-500/10', text: 'text-primary-500', border: 'border-primary-500/20' },
-};
-
-function AchievementCard({ achievement, index }) {
-  const Icon = iconMap[achievement.icon] || Star;
-  const colors = categoryColors[achievement.category] || categoryColors.default;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      whileHover={{ y: -4, scale: 1.01 }}
-      className={`card p-5 flex gap-4 ${achievement.highlight ? 'ring-2 ring-primary-500/30' : ''}`}
-    >
-      {/* Icon */}
-      <div
-        className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 ${colors.bg} border ${colors.border}`}
-      >
-        <Icon className={`w-5 h-5 ${colors.text}`} aria-hidden="true" />
-      </div>
-
-      {/* Content */}
-      <div className="flex-1 min-w-0">
-        <div className="flex items-start justify-between gap-2 mb-1.5">
-          <h3 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>{achievement.title}</h3>
-          <span className="text-xs font-mono flex-shrink-0" style={{ color: 'var(--text-tertiary)' }}>{achievement.date}</span>
-        </div>
-        <p className="text-xs leading-relaxed mb-2" style={{ color: 'var(--text-secondary)' }}>{achievement.description}</p>
-        <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium ${colors.bg} ${colors.text} border ${colors.border}`}>
-          {achievement.category}
-        </span>
-      </div>
-    </motion.div>
-  );
-}
 
 export default function Achievements() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
+  const inView = useInView(ref, { once: true, margin: '-60px' });
 
   return (
-    <section id="achievements" className="section-padding" aria-labelledby="achievements-heading">
+    <section id="achievements" className="section-padding border-b" style={{ borderColor: 'var(--border)' }} aria-labelledby="achievements-heading">
       <div className="section-container" ref={ref}>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
+          className="space-y-12"
         >
           {/* Header */}
-          <div className="text-center mb-12">
-            <p className="text-xs font-mono font-medium text-primary-500 mb-2 tracking-wider uppercase">Recognition</p>
-            <h2 id="achievements-heading" className="section-title">Achievements</h2>
-            <p className="section-subtitle mt-3 max-w-lg mx-auto">
-              Academic milestones, competitions, and experiences that shaped my journey
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b" style={{ borderColor: 'var(--border)' }}>
+            <div>
+              <p className="section-eyebrow">RECOGNITION</p>
+              <h2 id="achievements-heading" className="section-title">Milestones & Achievements</h2>
+            </div>
+            <p className="text-xs font-mono" style={{ color: 'var(--text-tertiary)' }}>
+              [Verified competitions & honors]
             </p>
           </div>
 
-          {/* Instructions */}
-          <div
-            className="mb-8 p-4 rounded-xl text-sm text-center"
-            style={{ background: 'rgba(99,102,241,0.08)', border: '1px solid rgba(99,102,241,0.2)', color: 'var(--text-secondary)' }}
-          >
-            ✏️ Update your achievements in <code className="font-mono text-xs">src/data/achievements.js</code>
-          </div>
+          {/* Clean Timeline / List */}
+          <div className="border rounded-xl divide-y overflow-hidden" style={{ borderColor: 'var(--border)', backgroundColor: 'var(--bg-card)' }}>
+            {achievements.map((item) => (
+              <div
+                key={item.id}
+                className="p-5 sm:p-6 transition-colors hover:bg-[var(--bg-tertiary)] flex flex-col md:flex-row md:items-start justify-between gap-4 sm:gap-8"
+              >
+                {/* Year & Category */}
+                <div className="md:w-48 flex-shrink-0 flex items-center md:flex-col md:items-start gap-3 md:gap-1">
+                  <span className="font-mono text-sm font-semibold" style={{ color: 'var(--accent)' }}>
+                    {item.year}
+                  </span>
+                  <span
+                    className="font-mono text-[10px] uppercase px-2 py-0.5 rounded border"
+                    style={{
+                      borderColor: 'var(--border)',
+                      color: 'var(--text-tertiary)',
+                      background: 'var(--bg-tertiary)',
+                    }}
+                  >
+                    {item.category}
+                  </span>
+                </div>
 
-          {/* Grid */}
-          <div className="grid sm:grid-cols-2 gap-5">
-            {achievements.map((achievement, i) => (
-              <AchievementCard key={achievement.id} achievement={achievement} index={i} />
+                {/* Main Content */}
+                <div className="flex-1 space-y-1.5">
+                  <h3 className="text-base font-medium leading-snug" style={{ color: 'var(--text-primary)' }}>
+                    {item.title}
+                  </h3>
+                  <p className="font-mono text-xs" style={{ color: 'var(--text-tertiary)' }}>
+                    {item.issuer}
+                  </p>
+                  <p className="text-xs sm:text-sm leading-relaxed font-normal pt-1" style={{ color: 'var(--text-secondary)' }}>
+                    {item.description}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
         </motion.div>
