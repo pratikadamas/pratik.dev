@@ -261,6 +261,70 @@
   background: var(--text-tertiary);
 }
 
+/* ==========================================================================
+   MOBILE RESPONSIVENESS & MEDIA QUERIES
+   ========================================================================== */
+
+/* Prevent iOS auto-zoom on input focus */
+@media screen and (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+
+  .section-padding {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+
+  .section-container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+/* Extra small devices (320px - 480px, e.g. iPhone SE, Galaxy, compact phones) */
+@media screen and (max-width: 480px) {
+  .section-padding {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  .section-title {
+    font-size: 1.65rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .section-subtitle {
+    font-size: 0.875rem !important;
+  }
+
+  .card {
+    border-radius: 0.875rem !important;
+  }
+
+  /* Compact buttons on small screens */
+  .btn-primary,
+  .btn-secondary {
+    padding: 0.65rem 1.15rem !important;
+    font-size: 0.8125rem !important;
+  }
+}
+
+/* Touch device ergonomics & safe-area insets (iOS home bar, notch) */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .mobile-safe-bottom {
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+  }
+  .mobile-safe-top {
+    padding-top: calc(1rem + env(safe-area-inset-top));
+  }
+}
+
 /* Reduce motion */
 @media (prefers-reduced-motion: reduce) {
   *,

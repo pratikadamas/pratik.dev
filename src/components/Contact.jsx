@@ -87,19 +87,19 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
         >
           {/* Header */}
-          <div className="text-center mb-12">
-            <p className="text-xs font-mono font-medium text-primary-500 mb-3 tracking-wider uppercase">Get In Touch</p>
-            <h2 id="contact-heading" className="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight mb-4">
+          <div className="text-center mb-8 sm:mb-12">
+            <p className="text-xs font-mono font-medium text-primary-500 mb-2 sm:mb-3 tracking-wider uppercase">Get In Touch</p>
+            <h2 id="contact-heading" className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-3 sm:mb-4">
               <span style={{ color: 'var(--text-primary)' }}>Let's Build</span>
               <br />
               <span className="gradient-text">Something Together</span>
             </h2>
-            <p className="text-sm sm:text-base max-w-lg mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+            <p className="text-xs sm:text-base max-w-lg mx-auto leading-relaxed px-4" style={{ color: 'var(--text-secondary)' }}>
               Have a project idea, internship opportunity, research collaboration, or just want to talk tech? Feel free to reach out.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             {/* Left: Contact info + Social media */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}

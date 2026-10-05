@@ -186,11 +186,11 @@ export default function Projects() {
             initial={{ opacity: 0, x: 60 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
-            className="text-center mb-12"
+            className="text-center mb-8 sm:mb-12"
           >
             <p className="text-xs font-mono font-medium text-primary-500 mb-2 tracking-wider uppercase">Projects</p>
             <h2 id="projects-heading" className="section-title">Things I've Built</h2>
-            <p className="section-subtitle mt-3 max-w-lg mx-auto">
+            <p className="section-subtitle mt-2 sm:mt-3 max-w-lg mx-auto">
               Real-world projects spanning AI/ML, full-stack development, and quantum computing
             </p>
           </motion.div>
@@ -200,7 +200,7 @@ export default function Projects() {
             initial={{ opacity: 0, x: -60 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.15, ease: [0.25, 1, 0.5, 1] }}
-            className="flex flex-wrap items-center justify-center gap-2 mb-10"
+            className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-8 sm:mb-10"
             role="tablist"
             aria-label="Filter projects by category"
           >
@@ -211,7 +211,7 @@ export default function Projects() {
                 whileTap={{ scale: 0.95 }}
                 role="tab"
                 aria-selected={activeCategory === cat.id}
-                className={`px-5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 ${
+                className={`px-3.5 py-1.5 sm:px-5 sm:py-2 rounded-xl text-[11px] sm:text-xs font-semibold transition-all duration-200 ${
                   activeCategory === cat.id
                     ? 'bg-primary-500 text-white shadow-md shadow-primary-500/25'
                     : 'hover:text-primary-500 hover:border-primary-500/50'
@@ -228,7 +228,7 @@ export default function Projects() {
           </motion.div>
 
           {/* Projects Grid */}
-          <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             <AnimatePresence mode="popLayout">
               {filtered.map((project, index) => (
                 <ProjectCard key={project.id} project={project} index={index} inView={inView} />

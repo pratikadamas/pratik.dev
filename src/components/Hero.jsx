@@ -137,24 +137,24 @@ export default function Hero() {
         className="section-container relative z-10 text-center pt-24 pb-16"
       >
         {/* Status badge */}
-        <motion.div variants={itemVariants} className="flex justify-center mb-8">
+        <motion.div variants={itemVariants} className="flex justify-center mb-6 sm:mb-8">
           <div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium border"
+            className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-medium border max-w-[90vw] text-center"
             style={{
               background: 'var(--bg-card)',
               border: '1px solid var(--border)',
               color: 'var(--text-secondary)',
             }}
           >
-            <span className="w-2 h-2 rounded-full bg-accent-500 animate-pulse" />
-            Final Year CSE Student · Open to Opportunities
+            <span className="w-2 h-2 rounded-full bg-accent-500 animate-pulse flex-shrink-0" />
+            <span className="truncate sm:whitespace-normal">Final Year CSE Student · Open to Opportunities</span>
           </div>
         </motion.div>
 
         {/* Main heading */}
         <motion.h1
           variants={itemVariants}
-          className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] text-balance mb-6"
+          className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.12] sm:leading-[1.08] text-balance mb-4 sm:mb-6"
         >
           <span style={{ color: 'var(--text-primary)' }}>Hi, I'm </span>
           <span className="gradient-text">Pratik Giri</span>
@@ -163,16 +163,16 @@ export default function Hero() {
         {/* Subtitle */}
         <motion.p
           variants={itemVariants}
-          className="text-base sm:text-lg lg:text-xl font-medium mb-6 max-w-2xl mx-auto"
+          className="text-sm sm:text-base lg:text-xl font-medium mb-4 sm:mb-6 max-w-2xl mx-auto px-2 leading-relaxed"
           style={{ color: 'var(--text-secondary)' }}
         >
-          Computer Science Engineer&nbsp;·&nbsp;AI/ML Enthusiast&nbsp;·&nbsp;Full-Stack Developer&nbsp;·&nbsp;Quantum Computing Explorer
+          Computer Science Engineer <span className="text-primary-400">·</span> AI/ML Enthusiast <span className="text-primary-400">·</span> Full-Stack Developer <span className="text-primary-400">·</span> Quantum Explorer
         </motion.p>
 
         {/* Description */}
         <motion.p
           variants={itemVariants}
-          className="text-sm sm:text-base max-w-xl mx-auto mb-10 leading-relaxed text-balance"
+          className="text-xs sm:text-sm lg:text-base max-w-xl mx-auto mb-8 sm:mb-10 leading-relaxed text-balance px-4"
           style={{ color: 'var(--text-tertiary)' }}
         >
           I build intelligent systems, scalable web applications, and explore the intersection of
@@ -182,7 +182,7 @@ export default function Hero() {
         {/* CTA Buttons */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-12 px-4 w-full max-w-sm sm:max-w-none mx-auto"
         >
           <motion.button
             onClick={() => handleScroll('projects')}
@@ -236,7 +236,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
-          className="mt-16 flex justify-center"
+          className="mt-6 sm:mt-16 flex justify-center"
         >
           <motion.button
             onClick={() => handleScroll('about')}

@@ -44,7 +44,7 @@ export default function About() {
           <div className="max-w-4xl mx-auto mb-16">
             <motion.div variants={itemVariants} className="space-y-10">
               {/* Bio */}
-              <div className="space-y-6 text-center sm:text-left text-lg">
+              <div className="space-y-4 sm:space-y-6 text-center sm:text-left text-sm sm:text-base lg:text-lg">
                 <p className="leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                   I'm <strong style={{ color: 'var(--text-primary)' }}>Pratik Giri</strong>, a final-year Computer Science Engineering student
                   with a deep passion for building intelligent systems and scalable software. I thrive at the
@@ -64,21 +64,21 @@ export default function About() {
               </div>
 
               {/* Interests */}
-              <div className="pt-8 border-t" style={{ borderColor: 'var(--border)' }}>
-                <h3 className="text-center sm:text-left text-xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>What I'm Interested In</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="pt-6 sm:pt-8 border-t" style={{ borderColor: 'var(--border)' }}>
+                <h3 className="text-center sm:text-left text-lg sm:text-xl font-bold mb-6 sm:mb-8" style={{ color: 'var(--text-primary)' }}>What I'm Interested In</h3>
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                   {interests.map((interest) => {
                     const Icon = interest.icon;
                     return (
                       <motion.div
                         key={interest.label}
                         whileHover={{ scale: 1.05, y: -4 }}
-                        className="card p-5 flex flex-col items-center text-center gap-4 cursor-default group transition-all duration-300"
+                        className="card p-3.5 sm:p-5 flex flex-col items-center text-center gap-2 sm:gap-4 cursor-default group transition-all duration-300"
                       >
-                        <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-slate-100 dark:bg-slate-800 group-hover:scale-110 transition-transform">
-                          <Icon className={`w-6 h-6 ${interest.color}`} aria-hidden="true" />
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center bg-slate-100 dark:bg-slate-800 group-hover:scale-110 transition-transform">
+                          <Icon className={`w-5 h-5 sm:w-6 sm:h-6 ${interest.color}`} aria-hidden="true" />
                         </div>
-                        <span className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>{interest.label}</span>
+                        <span className="text-xs sm:text-sm font-semibold leading-tight" style={{ color: 'var(--text-primary)' }}>{interest.label}</span>
                       </motion.div>
                     );
                   })}

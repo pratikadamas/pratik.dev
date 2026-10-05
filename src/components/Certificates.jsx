@@ -114,8 +114,8 @@ function CertModal({ cert, onClose }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.25 }}
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
-      style={{ background: 'rgba(0,0,0,0.85)' }}
+      className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6"
+      style={{ background: 'rgba(0,0,0,0.88)' }}
       onClick={onClose}
       role="dialog"
       aria-modal="true"
@@ -126,83 +126,61 @@ function CertModal({ cert, onClose }) {
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.9, opacity: 0, y: 10 }}
         transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-        className="relative max-w-3xl w-full rounded-2xl overflow-hidden"
+        className="relative max-w-3xl w-full max-h-[92vh] flex flex-col rounded-2xl overflow-hidden shadow-2xl"
         style={{
           background: 'var(--bg-card)',
           border: '1px solid var(--border)',
-          boxShadow: '0 25px 50px rgba(0,0,0,0.5)',
+          boxShadow: '0 25px 50px rgba(0,0,0,0.6)',
         }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 z-10 w-9 h-9 rounded-xl flex items-center justify-center transition-colors"
-          style={{
-            background: 'rgba(0,0,0,0.4)',
-            color: 'white',
-          }}
+          className="absolute top-2.5 right-2.5 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center transition-colors backdrop-blur-md bg-black/60 hover:bg-black/80 text-white border border-white/10"
           aria-label="Close certificate modal"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
 
-        {/* Certificate image or PDF */}
-        <div className="relative bg-gray-900 flex items-center justify-center min-h-[50vh]">
+        {/* Certificate image */}
+        <div className="relative bg-gray-950 flex items-center justify-center min-h-[35vh] sm:min-h-[45vh] max-h-[60vh] sm:max-h-[70vh] p-2 sm:p-4 overflow-hidden">
           {cert.image && !imgError ? (
-            cert.image.toLowerCase().endsWith('.pdf') ? (
-              <div className="flex flex-col items-center justify-center gap-6 p-8 text-center w-full">
-                <div className="w-24 h-24 rounded-2xl bg-primary-500/10 flex items-center justify-center mb-2">
-                  <Award className="w-12 h-12 text-primary-400" aria-hidden="true" />
-                </div>
-                <div>
-                  <h4 className="text-xl font-bold mb-2 text-white">PDF Certificate</h4>
-                  <p className="text-sm text-gray-400 max-w-sm mx-auto mb-6">
-                    This certificate is stored securely as a PDF document. Click below to view or download it in full quality.
-                  </p>
-                </div>
-                <a
-                  href={cert.image}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary inline-flex items-center gap-2 px-6 py-3 shadow-lg shadow-primary-500/25"
-                >
-                  <ExternalLink className="w-5 h-5" aria-hidden="true" />
-                  Open PDF Document
-                </a>
-              </div>
-            ) : (
-              <img
-                src={cert.image}
-                alt={`${cert.title} certificate`}
-                className="w-full max-h-[70vh] object-contain"
-                onError={() => setImgError(true)}
-              />
-            )
+            <img
+              src={cert.image}
+              alt={`${cert.title} certificate`}
+              className="w-full h-full max-h-[58vh] sm:max-h-[68vh] object-contain rounded-lg"
+              onError={() => setImgError(true)}
+            />
           ) : (
             <div
-              className="w-full h-64 flex flex-col items-center justify-center gap-4"
+              className="w-full h-48 sm:h-64 flex flex-col items-center justify-center gap-3 p-4"
               style={{ background: 'var(--bg-tertiary)' }}
             >
-              <Award className="w-16 h-16 text-primary-400" aria-hidden="true" />
-              <p className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>Certificate image not available</p>
-              <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Add your certificate image to see it here</p>
+              <Award className="w-12 h-12 text-primary-400" aria-hidden="true" />
+              <p className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>Certificate image preview</p>
             </div>
           )}
         </div>
 
         {/* Info bar */}
-        <div className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="p-3.5 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 border-t" style={{ borderColor: 'var(--border)' }}>
           <div className="flex-1 min-w-0">
-            <h3 className="text-base font-bold mb-1" style={{ color: 'var(--text-primary)' }}>{cert.title}</h3>
-            <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>{cert.organization} · {cert.date}</p>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="px-2 py-0.5 text-[10px] font-medium rounded-full bg-primary-500/10 text-primary-400 border border-primary-500/20">
+                {cert.category}
+              </span>
+              <span className="text-xs font-mono" style={{ color: 'var(--text-tertiary)' }}>{cert.date}</span>
+            </div>
+            <h3 className="text-sm sm:text-base font-bold line-clamp-1" style={{ color: 'var(--text-primary)' }}>{cert.title}</h3>
+            <p className="text-xs sm:text-sm truncate" style={{ color: 'var(--text-secondary)' }}>{cert.organization}</p>
           </div>
           {cert.credentialUrl && cert.credentialUrl !== '#' && (
             <a
               href={cert.credentialUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary flex-shrink-0 text-xs"
+              className="btn-primary flex-shrink-0 text-xs py-2 px-4 justify-center"
               aria-label="View credential"
             >
               <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
@@ -233,32 +211,22 @@ export default function Certificates() {
             transition={{ duration: 0.6 }}
           >
             {/* Header */}
-            <div className="text-center mb-12">
+            <div className="text-center mb-8 sm:mb-12">
               <p className="text-xs font-mono font-medium text-primary-500 mb-2 tracking-wider uppercase">Credentials</p>
               <h2 id="certs-heading" className="section-title">Certificates & Credentials</h2>
-              <p className="section-subtitle mt-3 max-w-lg mx-auto">
+              <p className="section-subtitle mt-2 sm:mt-3 max-w-lg mx-auto">
                 Verified learning milestones across AI, development, and engineering
               </p>
             </div>
 
-            {/* Instructions */}
-            {certificates.every(c => !c.image) && (
-              <div
-                className="mb-8 p-4 rounded-xl text-sm text-center"
-                style={{ background: 'rgba(99,102,241,0.08)', border: '1px solid rgba(99,102,241,0.2)', color: 'var(--text-secondary)' }}
-              >
-                📋 Add your certificate images to <code className="font-mono text-xs">/public/certificates/</code> and update <code className="font-mono text-xs">src/data/certificates.js</code>
-              </div>
-            )}
-
             {/* Grid */}
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
               {certificates.map((cert, i) => (
                 <motion.div
                   key={cert.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: i * 0.1 }}
+                  transition={{ delay: i * 0.06 }}
                 >
                   <CertCard cert={cert} onClick={handleOpen} />
                 </motion.div>

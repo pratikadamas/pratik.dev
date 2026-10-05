@@ -53,10 +53,10 @@ export default function ScrollToTop() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             aria-label="Scroll to top"
-            className="fixed bottom-6 right-6 z-50 p-2 rounded-full glass bg-white/80 dark:bg-[#16161e]/90 shadow-xl border border-slate-200/50 dark:border-slate-700/50 flex items-center justify-center text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors"
+            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 p-1.5 sm:p-2 rounded-full glass bg-white/80 dark:bg-[#16161e]/90 shadow-xl border border-slate-200/50 dark:border-slate-700/50 flex items-center justify-center text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors"
           >
             {/* SVG Progress Circle */}
-            <svg className="w-10 h-10 -rotate-90" viewBox="0 0 44 44">
+            <svg className="w-8 h-8 sm:w-10 sm:h-10 -rotate-90" viewBox="0 0 44 44">
               <circle
                 cx="22"
                 cy="22"
@@ -77,7 +77,7 @@ export default function ScrollToTop() {
                 strokeLinecap="round"
               />
             </svg>
-            <ArrowUp className="w-4 h-4 absolute stroke-[2.5]" />
+            <ArrowUp className="w-3.5 h-3.5 sm:w-4 sm:h-4 absolute stroke-[2.5]" />
           </motion.button>
         )}
       </AnimatePresence>
