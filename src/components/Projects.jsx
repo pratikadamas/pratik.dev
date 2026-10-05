@@ -217,23 +217,22 @@ export default function Projects() {
                   whileTap={{ scale: 0.95 }}
                   role="tab"
                   aria-selected={isActive}
-                  className={`px-3.5 py-1.5 sm:px-5 sm:py-2 rounded-xl text-[11px] sm:text-xs font-semibold transition-all duration-200 border ${
-                    isActive
+                  className={`px-3.5 py-1.5 sm:px-5 sm:py-2 rounded-xl text-[11px] sm:text-xs font-semibold transition-all duration-200 border ${isActive
                       ? 'shadow-md'
                       : 'hover:text-[var(--accent)]'
-                  }`}
+                    }`}
                   style={
                     isActive
                       ? {
-                          backgroundColor: 'var(--text-primary)',
-                          color: 'var(--bg-primary)',
-                          borderColor: 'var(--text-primary)',
-                        }
+                        backgroundColor: 'var(--text-primary)',
+                        color: 'var(--bg-primary)',
+                        borderColor: 'var(--text-primary)',
+                      }
                       : {
-                          background: 'var(--bg-card)',
-                          border: '1px solid var(--border)',
-                          color: 'var(--text-secondary)',
-                        }
+                        background: 'var(--bg-card)',
+                        border: '1px solid var(--border)',
+                        color: 'var(--text-secondary)',
+                      }
                   }
                 >
                   {cat.label}

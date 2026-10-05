@@ -1,15 +1,15 @@
 import { useRef, useState, useEffect, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
-import { 
-  X, 
-  ExternalLink, 
-  Award, 
-  Cloud, 
-  GraduationCap, 
-  Sparkles, 
-  BookOpen, 
-  Brain, 
-  Trophy, 
+import {
+  X,
+  ExternalLink,
+  Award,
+  Cloud,
+  GraduationCap,
+  Sparkles,
+  BookOpen,
+  Brain,
+  Trophy,
   Maximize2,
   CheckCircle2,
   Filter
@@ -18,68 +18,68 @@ import { certificates } from '../data/certificates';
 
 // Platform metadata configuration for filters and badge styling
 const PLATFORMS = [
-  { 
-    id: 'all', 
-    label: 'All', 
+  {
+    id: 'all',
+    label: 'All',
     shortLabel: 'All',
-    icon: Award, 
-    color: 'emerald' 
+    icon: Award,
+    color: 'emerald'
   },
-  { 
-    id: 'aws', 
-    label: 'AWS', 
+  {
+    id: 'aws',
+    label: 'AWS',
     shortLabel: 'AWS',
-    icon: Cloud, 
+    icon: Cloud,
     color: 'amber',
     badge: 'AWS Academy',
     badgeClass: 'bg-amber-500/10 text-amber-500 dark:text-amber-400 border-amber-500/25',
     description: 'Accredited AWS Academy Graduate credentials in Cloud Operations, Data Engineering & Machine Learning.'
   },
-  { 
-    id: 'nptel', 
-    label: 'NPTEL', 
+  {
+    id: 'nptel',
+    label: 'NPTEL',
     shortLabel: 'NPTEL',
-    icon: GraduationCap, 
+    icon: GraduationCap,
     color: 'blue',
     badge: 'NPTEL Elite',
     badgeClass: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/25',
     description: 'Elite certifications issued by Ministry of Education (MHRD) & IIT Kharagpur in C, Modern C++, and Java DSA.'
   },
-  { 
-    id: 'infosys', 
-    label: 'Infosys', 
+  {
+    id: 'infosys',
+    label: 'Infosys',
     shortLabel: 'Infosys',
-    icon: Sparkles, 
+    icon: Sparkles,
     color: 'emerald',
     badge: 'Infosys Springboard',
     badgeClass: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/25',
     description: 'Industry-grade certifications in Computer Vision, Deep Learning, NLP, and Data Science.'
   },
-  { 
-    id: 'udemy', 
-    label: 'Udemy', 
+  {
+    id: 'udemy',
+    label: 'Udemy',
     shortLabel: 'Udemy',
-    icon: BookOpen, 
+    icon: BookOpen,
     color: 'purple',
     badge: 'Udemy Certified',
     badgeClass: 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/25',
     description: 'Bootcamps in Machine Learning, Full-Stack Web Development, and Deep Learning.'
   },
-  { 
-    id: 'great-learning', 
-    label: 'Great Learning', 
+  {
+    id: 'great-learning',
+    label: 'Great Learning',
     shortLabel: 'Great Learning',
-    icon: Brain, 
+    icon: Brain,
     color: 'teal',
     badge: 'Great Learning',
     badgeClass: 'bg-teal-500/10 text-teal-600 dark:text-teal-400 border-teal-500/25',
     description: 'Specialized program in Machine Learning Algorithms and mathematical foundations.'
   },
-  { 
-    id: 'other', 
-    label: 'Other Honors', 
+  {
+    id: 'other',
+    label: 'Other Honors',
     shortLabel: 'Others',
-    icon: Trophy, 
+    icon: Trophy,
     color: 'slate',
     badge: 'National & University',
     badgeClass: 'bg-slate-500/10 text-slate-600 dark:text-slate-400 border-slate-500/25',
@@ -103,10 +103,10 @@ function CertCard({ cert, onClick, index }) {
       initial={{ opacity: 0, scale: 0.96, y: 16 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ 
-        duration: 0.35, 
+      transition={{
+        duration: 0.35,
         delay: Math.min(index * 0.04, 0.3),
-        ease: [0.25, 1, 0.5, 1] 
+        ease: [0.25, 1, 0.5, 1]
       }}
       onClick={() => onClick(cert)}
       role="button"
@@ -167,8 +167,8 @@ function CertCard({ cert, onClick, index }) {
             <span className="text-[var(--text-tertiary)]">{cert.date}</span>
           </div>
 
-          <h3 
-            className="text-xs sm:text-sm font-semibold leading-snug line-clamp-2 transition-colors group-hover:text-[var(--accent)]" 
+          <h3
+            className="text-xs sm:text-sm font-semibold leading-snug line-clamp-2 transition-colors group-hover:text-[var(--accent)]"
             style={{ color: 'var(--text-primary)' }}
           >
             {cert.title}
@@ -340,10 +340,10 @@ export default function Certificates() {
 
   return (
     <>
-      <section 
-        id="certificates" 
-        className="section-padding border-b" 
-        style={{ borderColor: 'var(--border)' }} 
+      <section
+        id="certificates"
+        className="section-padding border-b"
+        style={{ borderColor: 'var(--border)' }}
         aria-labelledby="certs-heading"
       >
         <div className="section-container" ref={ref}>
@@ -372,7 +372,7 @@ export default function Certificates() {
 
             {/* Platform Filter Tabs (Linear / Raycast Style) */}
             <div className="space-y-4">
-              <div 
+              <div
                 className="flex flex-wrap items-center gap-2 sm:gap-2.5 pt-1"
                 role="tablist"
                 aria-label="Filter certificates by platform"
@@ -389,33 +389,31 @@ export default function Certificates() {
                       whileTap={{ scale: 0.96 }}
                       role="tab"
                       aria-selected={isActive}
-                      className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all duration-200 border flex-shrink-0 ${
-                        isActive
+                      className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all duration-200 border flex-shrink-0 ${isActive
                           ? 'shadow-sm'
                           : 'hover:border-[var(--border-hover)] hover:bg-[var(--bg-tertiary)]'
-                      }`}
+                        }`}
                       style={
                         isActive
                           ? {
-                              backgroundColor: 'var(--text-primary)',
-                              color: 'var(--bg-primary)',
-                              borderColor: 'var(--text-primary)',
-                            }
+                            backgroundColor: 'var(--text-primary)',
+                            color: 'var(--bg-primary)',
+                            borderColor: 'var(--text-primary)',
+                          }
                           : {
-                              background: 'var(--bg-card)',
-                              borderColor: 'var(--border)',
-                              color: 'var(--text-secondary)',
-                            }
+                            background: 'var(--bg-card)',
+                            borderColor: 'var(--border)',
+                            color: 'var(--text-secondary)',
+                          }
                       }
                     >
                       <Icon className="w-3.5 h-3.5" aria-hidden="true" />
                       <span>{tab.label}</span>
                       <span
-                        className={`text-[10px] font-mono px-1.5 py-0.5 rounded-md transition-colors ${
-                          isActive
+                        className={`text-[10px] font-mono px-1.5 py-0.5 rounded-md transition-colors ${isActive
                             ? 'bg-black/20 text-[var(--bg-primary)] dark:bg-white/20'
                             : 'bg-[var(--bg-tertiary)] text-[var(--text-tertiary)]'
-                        }`}
+                          }`}
                       >
                         {count}
                       </span>
@@ -425,7 +423,7 @@ export default function Certificates() {
               </div>
 
               {/* Status & Issuer Context Bar */}
-              <div 
+              <div
                 className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 rounded-xl border text-xs"
                 style={{
                   background: 'var(--bg-secondary)',
@@ -463,17 +461,17 @@ export default function Certificates() {
             </div>
 
             {/* Certificate Grid with Animated Transitions */}
-            <motion.div 
+            <motion.div
               layout
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 min-h-[360px]"
             >
               <AnimatePresence mode="popLayout">
                 {filteredCertificates.map((cert, index) => (
-                  <CertCard 
-                    key={cert.id} 
-                    cert={cert} 
-                    onClick={handleOpen} 
-                    index={index} 
+                  <CertCard
+                    key={cert.id}
+                    cert={cert}
+                    onClick={handleOpen}
+                    index={index}
                   />
                 ))}
               </AnimatePresence>

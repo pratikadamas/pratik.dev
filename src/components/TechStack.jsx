@@ -136,14 +136,14 @@ export default function TechStack() {
                   style={
                     isActive
                       ? {
-                          backgroundColor: 'var(--text-primary)',
-                          color: 'var(--bg-primary)',
-                        }
+                        backgroundColor: 'var(--text-primary)',
+                        color: 'var(--bg-primary)',
+                      }
                       : {
-                          background: 'var(--bg-card)',
-                          border: '1px solid var(--border)',
-                          color: 'var(--text-secondary)',
-                        }
+                        background: 'var(--bg-card)',
+                        border: '1px solid var(--border)',
+                        color: 'var(--text-secondary)',
+                      }
                   }
                 >
                   {Icon && <Icon className="w-3.5 h-3.5" aria-hidden="true" />}

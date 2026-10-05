@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import PageLoader from './components/PageLoader';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -12,13 +14,26 @@ import ScrollToTop from './components/ScrollToTop';
 import CustomCursor from './components/CustomCursor';
 
 function App() {
+  const [loading, setLoading] = useState(true);
   const [darkMode, setDarkMode] = useState(() => {
     try {
       const stored = localStorage.getItem('theme');
       if (stored) return stored === 'dark';
-    } catch {}
+    } catch { }
     return true; // default dark
   });
+
+  // Lock body scroll while loader is visible
+  useEffect(() => {
+    if (loading) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [loading]);
 
   // Apply/remove 'dark' class on <html> and persist
   useEffect(() => {
@@ -30,11 +45,16 @@ function App() {
     }
     try {
       localStorage.setItem('theme', darkMode ? 'dark' : 'light');
-    } catch {}
+    } catch { }
   }, [darkMode]);
 
   return (
     <>
+      {/* NeoLeaf Awwwards Inspired Loading Animation */}
+      <AnimatePresence mode="wait">
+        {loading && <PageLoader onLoadingComplete={() => setLoading(false)} />}
+      </AnimatePresence>
+
       {/* Butter-Smooth Custom Animated Cursor */}
       <CustomCursor />
 
