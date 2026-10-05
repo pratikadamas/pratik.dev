@@ -35,13 +35,24 @@ function CertCard({ cert, onClick }) {
     >
       <div className="relative overflow-hidden">
         {cert.image && !imgError ? (
-          <img
-            src={cert.image}
-            alt={`${cert.title} certificate`}
-            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
-            loading="lazy"
-            onError={() => setImgError(true)}
-          />
+          cert.image.toLowerCase().endsWith('.pdf') ? (
+            <div
+              className="w-full h-48 flex flex-col items-center justify-center gap-3 group-hover:scale-105 transition-transform duration-500"
+              style={{ background: 'var(--bg-tertiary)' }}
+            >
+              <Award className="w-10 h-10 text-primary-400" aria-hidden="true" />
+              <p className="text-xs font-semibold px-4 text-center line-clamp-2" style={{ color: 'var(--text-primary)' }}>{cert.title}</p>
+              <span className="text-[10px] uppercase font-bold text-red-400/80 border border-red-400/30 px-2 py-0.5 rounded bg-red-400/10">PDF Document</span>
+            </div>
+          ) : (
+            <img
+              src={cert.image}
+              alt={`${cert.title} certificate`}
+              className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+              onError={() => setImgError(true)}
+            />
+          )
         ) : (
           <CertPlaceholder title={cert.title} org={cert.organization} />
         )}
@@ -134,15 +145,38 @@ function CertModal({ cert, onClose }) {
           <X className="w-5 h-5" />
         </button>
 
-        {/* Certificate image */}
-        <div className="relative">
+        {/* Certificate image or PDF */}
+        <div className="relative bg-gray-900 flex items-center justify-center min-h-[50vh]">
           {cert.image && !imgError ? (
-            <img
-              src={cert.image}
-              alt={`${cert.title} certificate`}
-              className="w-full max-h-[70vh] object-contain bg-gray-900"
-              onError={() => setImgError(true)}
-            />
+            cert.image.toLowerCase().endsWith('.pdf') ? (
+              <div className="flex flex-col items-center justify-center gap-6 p-8 text-center w-full">
+                <div className="w-24 h-24 rounded-2xl bg-primary-500/10 flex items-center justify-center mb-2">
+                  <Award className="w-12 h-12 text-primary-400" aria-hidden="true" />
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold mb-2 text-white">PDF Certificate</h4>
+                  <p className="text-sm text-gray-400 max-w-sm mx-auto mb-6">
+                    This certificate is stored securely as a PDF document. Click below to view or download it in full quality.
+                  </p>
+                </div>
+                <a
+                  href={cert.image}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary inline-flex items-center gap-2 px-6 py-3 shadow-lg shadow-primary-500/25"
+                >
+                  <ExternalLink className="w-5 h-5" aria-hidden="true" />
+                  Open PDF Document
+                </a>
+              </div>
+            ) : (
+              <img
+                src={cert.image}
+                alt={`${cert.title} certificate`}
+                className="w-full max-h-[70vh] object-contain"
+                onError={() => setImgError(true)}
+              />
+            )
           ) : (
             <div
               className="w-full h-64 flex flex-col items-center justify-center gap-4"
