@@ -143,14 +143,16 @@ export default function About() {
                   {interests.map((interest) => {
                     const Icon = interest.icon;
                     return (
-                      <div
+                      <motion.div
                         key={interest.label}
-                        className="flex items-center gap-3 p-3 rounded-xl"
-                        style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}
+                        whileHover={{ scale: 1.03, y: -2 }}
+                        className="card p-3.5 flex items-center gap-3 cursor-default group transition-all duration-300"
                       >
-                        <Icon className={`w-4 h-4 flex-shrink-0 ${interest.color}`} aria-hidden="true" />
+                        <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-slate-100 dark:bg-slate-800 group-hover:scale-110 transition-transform">
+                          <Icon className={`w-4 h-4 ${interest.color}`} aria-hidden="true" />
+                        </div>
                         <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{interest.label}</span>
-                      </div>
+                      </motion.div>
                     );
                   })}
                 </div>
