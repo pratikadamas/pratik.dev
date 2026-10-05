@@ -67,21 +67,21 @@ function ProjectThumbnail({ project }) {
   );
 }
 
-function ProjectCard({ project, index }) {
+function ProjectCard({ project, index, inView }) {
   // Alternating directional entrance for 1/2/3 column responsive grids
-  // index % 2 === 0 from left (-60px), index % 2 === 1 from right (+60px)
-  const xOffset = index % 2 === 0 ? -60 : 60;
+  // index % 2 === 0 from left (-80px), index % 2 === 1 from right (+80px)
+  const isLeft = index % 2 === 0;
+  const xOffset = isLeft ? -80 : 80;
 
   return (
     <motion.article
       layout
       initial={{ opacity: 0, x: xOffset, y: 20 }}
-      whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
+      animate={inView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, x: xOffset, y: 20 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{
-        duration: 0.6,
-        delay: (index % 3) * 0.1,
+        duration: 0.65,
+        delay: (index % 3) * 0.12,
         ease: [0.25, 1, 0.5, 1],
       }}
       whileHover={{ y: -6 }}
@@ -231,7 +231,7 @@ export default function Projects() {
           <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <AnimatePresence mode="popLayout">
               {filtered.map((project, index) => (
-                <ProjectCard key={project.id} project={project} index={index} />
+                <ProjectCard key={project.id} project={project} index={index} inView={inView} />
               ))}
             </AnimatePresence>
           </motion.div>

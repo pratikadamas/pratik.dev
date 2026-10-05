@@ -42,14 +42,14 @@ export const achievements = [
 
 export const achievementCategories = ["All", "Academic", "Competitive", "Experience", "Hackathon"];
 
-// Social links — replace with your actual usernames/URLs
+// Social links
 export const socialLinks = [
   {
     id: "github",
     name: "GitHub",
-    username: "yourusername",
-    url: "https://github.com/yourusername",
-    handle: "github.com/yourusername",
+    username: "pratikadamas",
+    url: "https://github.com/pratikadamas",
+    handle: "github.com/pratikadamas",
     color: "#333",
     darkColor: "#f1f5f9",
     bgHover: "hover:bg-gray-100 dark:hover:bg-gray-800",
@@ -57,27 +57,27 @@ export const socialLinks = [
   {
     id: "linkedin",
     name: "LinkedIn",
-    username: "yourusername",
-    url: "https://linkedin.com/in/yourusername",
-    handle: "linkedin.com/in/yourusername",
+    username: "pratik-giri-745b51291",
+    url: "https://linkedin.com/in/pratik-giri-745b51291/",
+    handle: "linkedin.com/in/pratik-giri-745b51291",
     color: "#0A66C2",
     bgHover: "hover:bg-blue-50 dark:hover:bg-blue-900/20",
   },
   {
     id: "leetcode",
     name: "LeetCode",
-    username: "yourusername",
-    url: "https://leetcode.com/u/yourusername",
-    handle: "leetcode.com/u/yourusername",
+    username: "pratik_giri2024",
+    url: "https://www.leetcode.com/pratik_giri2024",
+    handle: "leetcode.com/pratik_giri2024",
     color: "#FFA116",
     bgHover: "hover:bg-amber-50 dark:hover:bg-amber-900/20",
   },
   {
     id: "kaggle",
     name: "Kaggle",
-    username: "yourusername",
-    url: "https://kaggle.com/yourusername",
-    handle: "kaggle.com/yourusername",
+    username: "pratikgiri2024",
+    url: "https://kaggle.com/pratikgiri2024",
+    handle: "kaggle.com/pratikgiri2024",
     color: "#20BEFF",
     bgHover: "hover:bg-sky-50 dark:hover:bg-sky-900/20",
   },

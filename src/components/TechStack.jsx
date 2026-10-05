@@ -17,25 +17,25 @@ const filterTabs = [
   ...techCategories.map(cat => ({ id: cat.id, label: cat.label })),
 ];
 
-function TechCard({ tech, index }) {
+function TechCard({ tech, index, inView }) {
   const [imgError, setImgError] = useState(false);
-  // Alternating entrance direction: even from left (-40px), odd from right (+40px)
-  const xOffset = index % 2 === 0 ? -40 : 40;
+  // Prominent alternating entrance: left side (-80px) and right side (+80px)
+  const isLeft = index % 2 === 0;
+  const xOffset = isLeft ? -80 : 80;
 
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, x: xOffset, y: 15 }}
-      whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
+      initial={{ opacity: 0, x: xOffset, y: 20 }}
+      animate={inView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, x: xOffset, y: 20 }}
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{
-        duration: 0.5,
-        delay: (index % 8) * 0.05,
+        duration: 0.6,
+        delay: Math.min((index % 6) * 0.08, 0.5),
         ease: [0.25, 1, 0.5, 1],
       }}
       whileHover={{ y: -6, scale: 1.05 }}
-      className="group flex flex-col items-center gap-2.5 p-4 rounded-xl cursor-default transition-shadow"
+      className="group flex flex-col items-center gap-2.5 p-4 rounded-xl cursor-default transition-all duration-300"
       style={{
         background: 'var(--bg-card)',
         border: '1px solid var(--border)',
@@ -169,7 +169,7 @@ export default function TechStack() {
           >
             <AnimatePresence mode="popLayout">
               {filtered.map((tech, index) => (
-                <TechCard key={`${tech.categoryId}-${tech.name}`} tech={tech} index={index} />
+                <TechCard key={`${tech.categoryId}-${tech.name}`} tech={tech} index={index} inView={inView} />
               ))}
             </AnimatePresence>
           </motion.div>
