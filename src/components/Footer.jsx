@@ -23,6 +23,7 @@ const socialIconMap = {
 const navLinks = [
   { href: '#home', label: 'Home' },
   { href: '#about', label: 'About' },
+  { href: '#education', label: 'Education' },
   { href: '#tech', label: 'Tech Stack' },
   { href: '#projects', label: 'Projects' },
   { href: '#certificates', label: 'Certificates' },
