@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { Github, ExternalLink, ArrowRight, Filter } from 'lucide-react';
+import { Github, ExternalLink } from 'lucide-react';
 import { projects, projectCategories } from '../data/projects';
 
 // Color maps for tech tags
