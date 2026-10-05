@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <rect width="100" height="100" rx="20" fill="#385876"/>
+  <!-- Seaborn statistical curve and bars -->
+  <path d="M22 68 C 30 68, 35 45, 45 45 C 55 45, 60 25, 78 25" stroke="#4C72B0" stroke-width="8" stroke-linecap="round"/>
+  <path d="M22 75 C 32 75, 38 52, 48 52 C 58 52, 63 32, 78 32" stroke="#55A868" stroke-width="8" stroke-linecap="round"/>
+  <path d="M22 82 C 34 82, 40 59, 50 59 C 60 59, 66 39, 78 39" stroke="#C44E52" stroke-width="8" stroke-linecap="round"/>
+  <!-- Scatter highlight points -->
+  <circle cx="45" cy="45" r="4.5" fill="#EAEAF2"/>
+  <circle cx="78" cy="25" r="4.5" fill="#EAEAF2"/>
+  <circle cx="22" cy="68" r="4.5" fill="#EAEAF2"/>
+</svg>
