@@ -49,6 +49,13 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* Custom cursor setup for desktop devices with fine pointer */
+  @media (hover: hover) and (pointer: fine) {
+    body, a, button, input, textarea, select, [role="button"] {
+      cursor: none !important;
+    }
+  }
+
   body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
@@ -98,6 +105,7 @@
   .card:hover {
     border-color: var(--border-hover);
     box-shadow: var(--shadow-lg);
+    transform: translateY(-3px);
   }
 
   .btn-primary {

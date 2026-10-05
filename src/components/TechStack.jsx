@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Code2, Brain, Layers, Database, Settings, Atom } from 'lucide-react';
 import { techCategories } from '../data/technologies';
 
@@ -7,43 +7,48 @@ const categoryIcons = {
   Code2, Brain, Layers, Database, Settings, Atom,
 };
 
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.08 } },
-};
+// Flatten all techs with their category info for filtering
+const allTechsFlat = techCategories.flatMap(cat =>
+  cat.technologies.map(tech => ({ ...tech, categoryId: cat.id }))
+);
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-};
+const filterTabs = [
+  { id: 'all', label: 'All' },
+  ...techCategories.map(cat => ({ id: cat.id, label: cat.label })),
+];
 
-function TechCard({ tech }) {
+function TechCard({ tech, index }) {
   const [imgError, setImgError] = useState(false);
 
   return (
     <motion.div
-      whileHover={{ y: -4, scale: 1.02 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-      className="group flex flex-col items-center gap-2 p-4 rounded-xl cursor-default"
+      layout
+      initial={{ opacity: 0, y: 20, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.3, delay: index * 0.03 }}
+      whileHover={{ y: -5, scale: 1.04 }}
+      className="group flex flex-col items-center gap-2.5 p-4 rounded-xl cursor-default"
       style={{
         background: 'var(--bg-card)',
         border: '1px solid var(--border)',
       }}
     >
       {/* Icon */}
-      <div className="w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-110"
+      <div
+        className="w-11 h-11 flex items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-110"
         style={{ background: 'var(--bg-tertiary)' }}
       >
         {tech.icon && !imgError ? (
           <img
             src={tech.icon}
             alt={tech.name}
-            className="w-6 h-6 object-contain"
+            className="w-7 h-7 object-contain"
             onError={() => setImgError(true)}
             loading="lazy"
           />
         ) : (
-          <span className="text-xl" role="img" aria-label={tech.name}>
+          <span className="text-2xl" role="img" aria-label={tech.name}>
             {tech.emoji || '⚡'}
           </span>
         )}
@@ -70,62 +75,90 @@ function TechCard({ tech }) {
   );
 }
 
-function CategorySection({ category, inView }) {
-  const Icon = categoryIcons[category.icon] || Code2;
-
-  return (
-    <motion.div variants={itemVariants} className="space-y-4">
-      {/* Category header */}
-      <div className="flex items-center gap-3">
-        <div
-          className={`w-9 h-9 rounded-xl flex items-center justify-center bg-gradient-to-br ${category.color} border ${category.borderColor}`}
-        >
-          <Icon className={`w-4 h-4 ${category.accentColor}`} aria-hidden="true" />
-        </div>
-        <div>
-          <h3 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>{category.label}</h3>
-          <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{category.technologies.length} technologies</p>
-        </div>
-      </div>
-
-      {/* Tech cards grid */}
-      <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
-        {category.technologies.map((tech) => (
-          <TechCard key={tech.name} tech={tech} />
-        ))}
-      </div>
-    </motion.div>
-  );
-}
-
 export default function TechStack() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
+  const [activeCategory, setActiveCategory] = useState('all');
+
+  const filtered = activeCategory === 'all'
+    ? allTechsFlat
+    : allTechsFlat.filter(t => t.categoryId === activeCategory);
+
+  // Current category accent color for the header badge
+  const activeCat = techCategories.find(c => c.id === activeCategory);
+  const ActiveIcon = activeCat ? categoryIcons[activeCat.icon] || Code2 : null;
 
   return (
     <section id="tech" className="section-padding" style={{ background: 'var(--bg-secondary)' }} aria-labelledby="tech-heading">
       <div className="section-container" ref={ref}>
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          className="space-y-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="space-y-10"
         >
           {/* Header */}
-          <motion.div variants={itemVariants} className="text-center">
+          <div className="text-center">
             <p className="text-xs font-mono font-medium text-primary-500 mb-2 tracking-wider uppercase">Tech Stack</p>
             <h2 id="tech-heading" className="section-title">Technologies I Work With</h2>
             <p className="section-subtitle mt-3 max-w-lg mx-auto">
               From machine learning to quantum circuits — my toolkit spans multiple domains
             </p>
-          </motion.div>
-
-          {/* Categories */}
-          <div className="grid md:grid-cols-2 gap-10">
-            {techCategories.map((category) => (
-              <CategorySection key={category.id} category={category} inView={inView} />
-            ))}
           </div>
+
+          {/* Category Filter Tabs */}
+          <div className="flex flex-wrap items-center justify-center gap-2" role="tablist" aria-label="Filter technologies by category">
+            {filterTabs.map((tab) => {
+              const isActive = activeCategory === tab.id;
+              const catData = techCategories.find(c => c.id === tab.id);
+              const Icon = catData ? categoryIcons[catData.icon] : null;
+              return (
+                <motion.button
+                  key={tab.id}
+                  onClick={() => setActiveCategory(tab.id)}
+                  whileTap={{ scale: 0.95 }}
+                  role="tab"
+                  aria-selected={isActive}
+                  className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 ${
+                    isActive
+                      ? 'bg-primary-500 text-white shadow-md shadow-primary-500/25'
+                      : 'hover:text-primary-500 hover:border-primary-500/50'
+                  }`}
+                  style={!isActive ? {
+                    background: 'var(--bg-card)',
+                    border: '1px solid var(--border)',
+                    color: 'var(--text-secondary)',
+                  } : {}}
+                >
+                  {Icon && <Icon className="w-3.5 h-3.5" aria-hidden="true" />}
+                  {tab.label}
+                </motion.button>
+              );
+            })}
+          </div>
+
+          {/* Count badge */}
+          <div className="flex items-center justify-center gap-2">
+            <span
+              className="text-xs font-medium px-3 py-1 rounded-full"
+              style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', color: 'var(--text-tertiary)' }}
+            >
+              {filtered.length} {filtered.length === 1 ? 'technology' : 'technologies'}
+              {activeCategory !== 'all' && activeCat ? ` in ${activeCat.label}` : ' total'}
+            </span>
+          </div>
+
+          {/* Tech Cards Grid */}
+          <motion.div
+            layout
+            className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-3"
+          >
+            <AnimatePresence mode="popLayout">
+              {filtered.map((tech, index) => (
+                <TechCard key={`${tech.categoryId}-${tech.name}`} tech={tech} index={index} />
+              ))}
+            </AnimatePresence>
+          </motion.div>
         </motion.div>
       </div>
     </section>
