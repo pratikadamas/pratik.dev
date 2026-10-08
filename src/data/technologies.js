@@ -30,7 +30,7 @@ export const techCategories = [
       { name: "TensorFlow", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg", tag: "DL" },
       { name: "PyTorch", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg", tag: "DL" },
       { name: "OpenCV", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg", tag: "Vision" },
-      { name: "YOLO", icon: null, tag: "Detection", emoji: "🎯" },
+      { name: "YOLO", icon: "/images/yolo.svg", tag: "Detection", emoji: "🎯" },
       { name: "EasyOCR", icon: null, tag: "OCR", emoji: "📝" },
       { name: "Streamlit", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/streamlit/streamlit-original.svg", tag: "ML Apps", emoji: "👑" },
     ],
