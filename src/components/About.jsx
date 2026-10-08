@@ -24,7 +24,7 @@ const focusAreas = [
     index: '04',
     title: 'Core CS & Logic',
     description: 'Solid base in data structures, algorithms, and clean logic in C++ and Java.',
-    tags: ['DSA', 'C++', 'Java', 'IIT Elite'],
+    tags: ['DSA', 'C++', 'Java'],
   },
 ];
 
@@ -91,7 +91,7 @@ export default function About() {
 
             {/* Quick Core Highlights in small words */}
             <div className="flex flex-wrap items-center gap-2 pt-2">
-              {['Clean Code', 'Fast Web', 'Smart AI', 'Vector Search', 'Good APIs', 'IIT Elite'].map((pill) => (
+              {['Clean Code', 'Fast Web', 'Smart AI', 'Vector Search', 'Good APIs'].map((pill) => (
                 <span
                   key={pill}
                   className="text-[10px] sm:text-[11px] font-mono font-medium px-2.5 py-1 rounded-md transition-colors"
