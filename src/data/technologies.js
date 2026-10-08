@@ -65,9 +65,9 @@ export const techCategories = [
       { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg", tag: "SQL" },
       { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg", tag: "SQL" },
       { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg", tag: "NoSQL" },
-      { name: "DuckDB", icon: null, tag: "Analytics", emoji: "🦆" },
+      { name: "DuckDB", icon: "https://cdn.simpleicons.org/duckdb/FFA500", tag: "Analytics", emoji: "🦆" },
       { name: "Pinecone", icon: null, tag: "Vector DB", emoji: "🌲" },
-      { name: "Qdrant", icon: null, tag: "Vector DB", emoji: "⚡" },
+      { name: "Qdrant", icon: "https://cdn.simpleicons.org/qdrant/E62B57", tag: "Vector DB", emoji: "⚡" },
     ],
   },
   {

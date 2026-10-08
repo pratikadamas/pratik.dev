@@ -70,10 +70,8 @@ function ProjectThumbnail({ project }) {
 }
 
 function ProjectCard({ project, index, inView }) {
-  // Alternating directional entrance for 1/2/3 column responsive grids
-  // index % 2 === 0 from left (-80px), index % 2 === 1 from right (+80px)
-  const isLeft = index % 2 === 0;
-  const xOffset = isLeft ? -80 : 80;
+  // Entrance from right (+80px) to left (0px)
+  const xOffset = 80;
 
   return (
     <motion.article
